@@ -4050,25 +4050,24 @@ for extended styling, use the add-on */
 }
 
 /* basic styling for the Media Bar Plugin - end */
-/* ===============================
-   ALLWAYS PATCH (keep at bottom)
-   =============================== */
+/* =========================================================
+   ALLWAYS FINAL PATCH
+   Home + Library fixed background, no grey overlay
+   ========================================================= */
+
+/* ---------- VARIABLES ---------- */
 :root{
   --allwaysRed: rgb(202,20,20);
   --allwaysBg: url("https://cdn.jsdelivr.net/gh/akrozephalos-maker/Jellyfin-Allways-theme@main/assets/bg.webp");
-  --bgDim: 0.50;  /* 0..1 */
+  --bgDim: 0.52; /* 0..1 */
   --cornerRadius: 10px;
 }
 
-/* ===============================
-   ALLWAYS: Background fixed (Home + Library ONLY)
-   =============================== */
-:root{
-  --allwaysBg: url("https://cdn.jsdelivr.net/gh/akrozephalos-maker/Jellyfin-Allways-theme@main/assets/bg.webp");
-  --bgDim: 0.52; /* 0..1 */
-}
+/* =========================================================
+   HOME + LIBRARY ONLY
+   ========================================================= */
 
-/* Make pages transparent so background shows */
+/* Make containers transparent so background can show */
 .homePage,
 .libraryPage,
 .homePage .page,
@@ -4079,31 +4078,51 @@ for extended styling, use the add-on */
   background-color: transparent !important;
 }
 
-/* Fixed background – NEVER scrolls */
+/* ---------- FIXED BACKGROUND ---------- */
 .homePage,
 .libraryPage{
   background-image:
     linear-gradient(rgba(0,0,0,var(--bgDim)), rgba(0,0,0,var(--bgDim))),
     var(--allwaysBg) !important;
   background-size: cover, cover !important;
-  background-position: center, center !important;
+  background-position: center center !important;
   background-repeat: no-repeat, no-repeat !important;
-  background-attachment: fixed, fixed !important; /* <- key */
+  background-attachment: fixed, fixed !important;
 }
 
+/* =========================================================
+   KILL GREY SCROLLING OVERLAY (ElegantFin/Jellyfin)
+   ========================================================= */
 
-/* Some Jellyfin builds wrap page content in .page/.mainAnimatedPage
-   but we only want it while we are on Home/Library */
-.homePage .page,
-.libraryPage .page,
-.homePage .mainAnimatedPage,
-.libraryPage .mainAnimatedPage{
-  background: transparent !important;
+.homePage .backgroundContainer,
+.libraryPage .backgroundContainer,
+.homePage .backdropContainer,
+.libraryPage .backdropContainer,
+.homePage .backdropImage,
+.libraryPage .backdropImage{
+  background: none !important;
+  background-image: none !important;
   background-color: transparent !important;
+  mask-image: none !important;
+  -webkit-mask-image: none !important;
 }
 
+.homePage .backgroundContainer::before,
+.homePage .backgroundContainer::after,
+.libraryPage .backgroundContainer::before,
+.libraryPage .backgroundContainer::after,
+.homePage .backdropContainer::before,
+.homePage .backdropContainer::after,
+.libraryPage .backdropContainer::before,
+.libraryPage .backdropContainer::after{
+  content: none !important;
+  background: none !important;
+}
 
-/* ---- Red focus / selection (kills white border) ---- */
+/* =========================================================
+   RED FOCUS / SELECTION (kill white border)
+   ========================================================= */
+
 .card:focus .cardBox.visualCardBox,
 .card:focus-visible .cardBox.visualCardBox,
 .card:focus .cardBox:not(.visualCardBox) .cardScalable,
@@ -4113,13 +4132,16 @@ for extended styling, use the add-on */
   border-color: var(--allwaysRed) !important;
 }
 
-/* Also kill outline focus that sometimes appears on TV */
+/* Remove TV outline glow */
 .layout-tv *:focus,
 .layout-tv *:focus-visible{
   outline: none !important;
 }
 
-/* ---- Corner play button: bottom-right, red, squared ---- */
+/* =========================================================
+   CORNER PLAY BUTTON (bottom-right, red)
+   ========================================================= */
+
 .cardOverlayContainer > .cardOverlayFab-primary{
   left: auto !important;
   right: -1px !important;
@@ -4132,118 +4154,46 @@ for extended styling, use the add-on */
   border-radius: var(--cornerRadius) 0 0 0 !important;
   background: linear-gradient(to bottom, rgb(225 45 45), rgb(170 20 20)) !important;
   border: 1px solid rgba(0,0,0,0.25) !important;
-  box-shadow: -1px 1px 6px rgba(0,0,0,0.45), inset 0 1px 2px rgba(255,255,255,0.18) !important;
+  box-shadow:
+    -1px 1px 6px rgba(0,0,0,0.45),
+    inset 0 1px 2px rgba(255,255,255,0.18) !important;
 }
+
 .cardOverlayContainer > .cardOverlayFab-primary,
 .cardOverlayContainer > .cardOverlayFab-primary .material-icons,
 .cardOverlayContainer > .cardOverlayFab-primary i{
   color: #fff !important;
 }
 
-/* ---- Top-right indicators cornered + red ---- */
-.cardIndicators, .listItemIndicators{
+/* =========================================================
+   TOP-RIGHT INDICATORS (red, cornered)
+   ========================================================= */
+
+.cardIndicators,
+.listItemIndicators{
   right: -1px !important;
   top: -1px !important;
   left: auto !important;
   bottom: auto !important;
 }
-.countIndicator, .playedIndicator, .fullSyncIndicator, .mediaSourceIndicator{
+
+.countIndicator,
+.playedIndicator,
+.fullSyncIndicator,
+.mediaSourceIndicator{
   border-radius: 0 var(--cornerRadius) !important;
   background: linear-gradient(to bottom, rgb(225 45 45), rgb(170 20 20)) !important;
   color: #fff !important;
   border: 1px solid rgba(0,0,0,0.25) !important;
-  box-shadow: -1px 1px 6px rgba(0,0,0,0.45), inset 0 1px 2px rgba(255,255,255,0.18) !important;
+  box-shadow:
+    -1px 1px 6px rgba(0,0,0,0.45),
+    inset 0 1px 2px rgba(255,255,255,0.18) !important;
 }
 
-/* ---- Make cards match your radius a bit more (optional) ---- */
+/* =========================================================
+   CARD SHAPE CONSISTENCY
+   ========================================================= */
+
 .cardScalable{
   border-radius: var(--cornerRadius) !important;
-}
-/* ===============================
-   KILL GREY SCROLLING OVERLAY (Home + Library)
-   =============================== */
-
-/* 1) Remove any background/gradient layers on common wrappers */
-.homePage,
-.libraryPage,
-.homePage .page,
-.libraryPage .page,
-.homePage .mainAnimatedPage,
-.libraryPage .mainAnimatedPage,
-.homePage #appHost,
-.libraryPage #appHost,
-.homePage .skinBody,
-.libraryPage .skinBody,
-.homePage .backgroundContainer,
-.libraryPage .backgroundContainer,
-.homePage .backdropContainer,
-.libraryPage .backdropContainer{
-  background: transparent !important;
-  background-image: none !important;
-  background-color: transparent !important;
-}
-
-/* 2) Disable masks that create “grey from bottom” fades */
-.homePage,
-.libraryPage,
-.homePage .page,
-.libraryPage .page,
-.homePage .mainAnimatedPage,
-.libraryPage .mainAnimatedPage,
-.homePage .backgroundContainer,
-.libraryPage .backgroundContainer{
-  mask-image: none !important;
-  -webkit-mask-image: none !important;
-}
-
-/* 3) Kill pseudo-element fades (very often the culprit) */
-.homePage::before,
-.homePage::after,
-.libraryPage::before,
-.libraryPage::after,
-.homePage .page::before,
-.homePage .page::after,
-.libraryPage .page::before,
-.libraryPage .page::after,
-.homePage .mainAnimatedPage::before,
-.homePage .mainAnimatedPage::after,
-.libraryPage .mainAnimatedPage::before,
-.libraryPage .mainAnimatedPage::after,
-.homePage .backgroundContainer::before,
-.homePage .backgroundContainer::after,
-.libraryPage .backgroundContainer::before,
-.libraryPage .backgroundContainer::after{
-  content: none !important;
-  background: none !important;
-}
-
-/* 4) If the grey bar is from a “panel/section footer gradient” */
-.homePage .paperList::before,
-.homePage .paperList::after,
-.libraryPage .paperList::before,
-.libraryPage .paperList::after,
-.homePage .visualCardBox::before,
-.homePage .visualCardBox::after,
-.libraryPage .visualCardBox::before,
-.libraryPage .visualCardBox::after{
-  content: none !important;
-  background: none !important;
-}
-
-
-/* If there is an overlay pseudo-element creating the grey fade */
-.homePage .backgroundContainer::before,
-.homePage .backgroundContainer::after,
-.libraryPage .backgroundContainer::before,
-.libraryPage .backgroundContainer::after,
-.homePage .mainAnimatedPage::before,
-.homePage .mainAnimatedPage::after,
-.libraryPage .mainAnimatedPage::before,
-.libraryPage .mainAnimatedPage::after{
-  content: none !important;
-  background: none !important;
-}
-.homePage .dashboardFooter,
-.libraryPage .dashboardFooter{
-  background: transparent !important;
 }
