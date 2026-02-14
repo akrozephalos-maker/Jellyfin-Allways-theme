@@ -4159,3 +4159,45 @@ for extended styling, use the add-on */
 .cardScalable{
   border-radius: var(--cornerRadius) !important;
 }
+/* ===============================
+   FIX: Grey scrolling layer over the fixed background (Home + Library)
+   =============================== */
+
+/* Kill page/background layers that ElegantFin/Jellyfin renders on top */
+.homePage .backgroundContainer,
+.libraryPage .backgroundContainer,
+.homePage .backdropContainer,
+.libraryPage .backdropContainer,
+.homePage .backdropImage,
+.libraryPage .backdropImage,
+.homePage .mainDrawer,
+.libraryPage .mainDrawer,
+.homePage .skinBody,
+.libraryPage .skinBody{
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+}
+
+/* Sometimes the grey comes from a bottom gradient/mask */
+.homePage .mainAnimatedPage,
+.libraryPage .mainAnimatedPage,
+.homePage .page,
+.libraryPage .page{
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+}
+
+/* If there is an overlay pseudo-element creating the grey fade */
+.homePage .backgroundContainer::before,
+.homePage .backgroundContainer::after,
+.libraryPage .backgroundContainer::before,
+.libraryPage .backgroundContainer::after,
+.homePage .mainAnimatedPage::before,
+.homePage .mainAnimatedPage::after,
+.libraryPage .mainAnimatedPage::before,
+.libraryPage .mainAnimatedPage::after{
+  content: none !important;
+  background: none !important;
+}
