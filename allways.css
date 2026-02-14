@@ -1,2 +1,2 @@
-/* Base Theme */
-@import url("https://cdn.jsdelivr.net/gh/lscambo13/ElegantFin@main/Theme/ElegantFin-jellyfin-theme-build-latest-minified.css");
+/* harmless test */
+body { outline: 6px solid lime !important; }
