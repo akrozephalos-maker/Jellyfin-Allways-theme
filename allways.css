@@ -2,30 +2,35 @@
 @import url("https://cdn.jsdelivr.net/gh/lscambo13/ElegantFin@main/Theme/ElegantFin-jellyfin-theme-build-latest-minified.css");
 
 :root{
-  --allwaysBg: url("https://cdn.jsdelivr.net/gh/akrozephalos-maker/Jellyfin-Allways-theme@main/assets/bg.webp?v=99");
-  --bgDim: 0.45;
   --marcoRed: rgb(202,20,20);
+
+  /* Background image (cachebuster v=) */
+  --allwaysBg: url("https://cdn.jsdelivr.net/gh/akrozephalos-maker/Jellyfin-Allways-theme@main/assets/bg.webp?v=2001");
+
+  /* Darkness of background (0..1) */
+  --bgDim: 0.55;
 }
 
-/* Background BEHIND the app (cannot cover posters) */
-html, body { background: #000 !important; }
+/* ===== Background WITHOUT overlays (safe for posters) =====
+   Use layered background: gradient + image
+*/
+body, .skinBody, #appHost{
+  background-image:
+    linear-gradient(rgba(0,0,0,var(--bgDim)), rgba(0,0,0,var(--bgDim))),
+    var(--allwaysBg) !important;
 
-body::before{
-  content:"";
-  position: fixed;
-  inset: 0;
-  background: var(--allwaysBg) center/cover no-repeat;
-  z-index: -2 !important;
-  pointer-events: none;
+  background-size: cover, cover !important;
+  background-position: center, center !important;
+  background-repeat: no-repeat, no-repeat !important;
+
+  /* TV-safe */
+  background-attachment: scroll, scroll !important;
 }
 
-body::after{
-  content:"";
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,var(--bgDim));
-  z-index: -1 !important;
-  pointer-events: none;
+/* OPTIONAL: keep content readable (subtle panel background) */
+.paperList,
+.visualCardBox{
+  background-color: rgba(30,40,54,.78) !important;
 }
 
 /* Force red focus border (override ElegantFin white) */
