@@ -4197,3 +4197,55 @@ for extended styling, use the add-on */
 .cardScalable{
   border-radius: var(--cornerRadius) !important;
 }
+/* =========================================================
+   FINAL KILL: grey scrolling fade overlay (Home + Library)
+   ========================================================= */
+
+/* 1) Kill fade pseudo-elements on common top wrappers */
+.homePage #appHost::before,
+.homePage #appHost::after,
+.libraryPage #appHost::before,
+.libraryPage #appHost::after,
+.homePage .skinBody::before,
+.homePage .skinBody::after,
+.libraryPage .skinBody::before,
+.libraryPage .skinBody::after,
+.homePage .mainAnimatedPage::before,
+.homePage .mainAnimatedPage::after,
+.libraryPage .mainAnimatedPage::before,
+.libraryPage .mainAnimatedPage::after,
+.homePage .page::before,
+.homePage .page::after,
+.libraryPage .page::before,
+.libraryPage .page::after{
+  content: none !important;
+  background: none !important;
+  background-image: none !important;
+  mask-image: none !important;
+  -webkit-mask-image: none !important;
+}
+
+/* 2) Also disable masks on these wrappers (some themes use mask-image instead of gradients) */
+.homePage #appHost,
+.libraryPage #appHost,
+.homePage .skinBody,
+.libraryPage .skinBody,
+.homePage .mainAnimatedPage,
+.libraryPage .mainAnimatedPage,
+.homePage .page,
+.libraryPage .page{
+  mask-image: none !important;
+  -webkit-mask-image: none !important;
+}
+
+/* 3) RE-APPLY fixed background LAST (so it can’t be overridden) */
+.homePage,
+.libraryPage{
+  background-image:
+    linear-gradient(rgba(0,0,0,var(--bgDim)), rgba(0,0,0,var(--bgDim))),
+    var(--allwaysBg) !important;
+  background-size: cover, cover !important;
+  background-position: center center !important;
+  background-repeat: no-repeat, no-repeat !important;
+  background-attachment: fixed, fixed !important;
+}
