@@ -1,2 +1,37 @@
-/* harmless test */
-body { outline: 6px solid lime !important; }
+/* =========================================================
+   Allways Theme – Base: ElegantFin (TV-first, stable)
+   ========================================================= */
+@import url("https://cdn.jsdelivr.net/gh/lscambo13/ElegantFin@main/Theme/ElegantFin-jellyfin-theme-build-latest-minified.css");
+
+:root{
+  --marcoRed: rgb(202,20,20);
+
+  /* background image */
+  --allwaysBg: url("https://cdn.jsdelivr.net/gh/akrozephalos-maker/Jellyfin-Allways-theme@main/assets/bg.webp");
+  --bgDim: 0.50; /* 0..1 */
+}
+
+/* Background safe: gradient + image (no pseudo overlays) */
+body, .skinBody, #appHost{
+  background-image:
+    linear-gradient(rgba(0,0,0,var(--bgDim)), rgba(0,0,0,var(--bgDim))),
+    var(--allwaysBg) !important;
+  background-size: cover, cover !important;
+  background-position: center, center !important;
+  background-repeat: no-repeat, no-repeat !important;
+  background-attachment: scroll, scroll !important; /* TV safe */
+}
+
+/* Readability panels */
+.paperList,
+.visualCardBox{
+  background-color: rgba(30,40,54,.78) !important;
+}
+
+/* Force red focus border (override ElegantFin white) */
+.card:focus .cardBox.visualCardBox,
+.card:focus-visible .cardBox.visualCardBox,
+.card:focus .cardBox:not(.visualCardBox) .cardScalable,
+.card:focus-visible .cardBox:not(.visualCardBox) .cardScalable{
+  border-color: var(--marcoRed) !important;
+}
