@@ -4051,8 +4051,10 @@ for extended styling, use the add-on */
 
 /* basic styling for the Media Bar Plugin - end */
 /* =========================================================
-   ALLWAYS FINAL PATCH
-   Home + Library fixed background, no grey overlay
+   ALLWAYS CLEAN PATCH (single-source-of-truth)
+   - Home + Library fixed background
+   - Removes ElegantFin/Jellyfin grey wash reliably
+   - Keeps posters intact
    ========================================================= */
 
 /* ---------- VARIABLES ---------- */
@@ -4064,10 +4066,10 @@ for extended styling, use the add-on */
 }
 
 /* =========================================================
-   HOME + LIBRARY ONLY
+   HOME + LIBRARY: BACKGROUND (fixed, non-scrolling)
    ========================================================= */
 
-/* Make containers transparent so background can show */
+/* Ensure page surfaces are transparent so the background can show */
 .homePage,
 .libraryPage,
 .homePage .page,
@@ -4076,9 +4078,10 @@ for extended styling, use the add-on */
 .libraryPage .mainAnimatedPage{
   background: transparent !important;
   background-color: transparent !important;
+  background-image: none !important;
 }
 
-/* ---------- FIXED BACKGROUND ---------- */
+/* Your background: ONLY source of truth */
 .homePage,
 .libraryPage{
   background-image:
@@ -4087,42 +4090,49 @@ for extended styling, use the add-on */
   background-size: cover, cover !important;
   background-position: center center !important;
   background-repeat: no-repeat, no-repeat !important;
-  background-attachment: fixed, fixed !important;
+  background-attachment: fixed, fixed !important;  /* <- never scroll */
 }
 
 /* =========================================================
-   KILL GREY SCROLLING OVERLAY (ElegantFin/Jellyfin)
+   KILL GREY WASH (global siblings in #reactRoot)
    ========================================================= */
 
-.homePage .backgroundContainer,
-.libraryPage .backgroundContainer,
-.homePage .backdropContainer,
-.libraryPage .backdropContainer,
-.homePage .backdropImage,
-.libraryPage .backdropImage{
-  background: none !important;
+/* These two containers exist as siblings in #reactRoot and generate the grey wash */
+#reactRoot > .backdropContainer,
+#reactRoot > .backgroundContainer{
+  background: transparent !important;
   background-image: none !important;
   background-color: transparent !important;
+  filter: none !important;
+  opacity: 1 !important;
   mask-image: none !important;
   -webkit-mask-image: none !important;
 }
 
-.homePage .backgroundContainer::before,
-.homePage .backgroundContainer::after,
-.libraryPage .backgroundContainer::before,
-.libraryPage .backgroundContainer::after,
-.homePage .backdropContainer::before,
-.homePage .backdropContainer::after,
-.libraryPage .backdropContainer::before,
-.libraryPage .backdropContainer::after{
+/* Their pseudo elements often draw the gradient/fade */
+#reactRoot > .backdropContainer::before,
+#reactRoot > .backdropContainer::after,
+#reactRoot > .backgroundContainer::before,
+#reactRoot > .backgroundContainer::after{
   content: none !important;
   background: none !important;
+  background-image: none !important;
+}
+
+/* Header blur/gradient can add an extra wash */
+.homePage .skinHeader-withBackground,
+.libraryPage .skinHeader-withBackground,
+.homePage .skinHeader-blurred,
+.libraryPage .skinHeader-blurred{
+  background: transparent !important;
+  background-image: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
 }
 
 /* =========================================================
-   RED FOCUS / SELECTION (kill white border)
+   RED FOCUS / SELECTION
    ========================================================= */
-
 .card:focus .cardBox.visualCardBox,
 .card:focus-visible .cardBox.visualCardBox,
 .card:focus .cardBox:not(.visualCardBox) .cardScalable,
@@ -4141,7 +4151,6 @@ for extended styling, use the add-on */
 /* =========================================================
    CORNER PLAY BUTTON (bottom-right, red)
    ========================================================= */
-
 .cardOverlayContainer > .cardOverlayFab-primary{
   left: auto !important;
   right: -1px !important;
@@ -4168,7 +4177,6 @@ for extended styling, use the add-on */
 /* =========================================================
    TOP-RIGHT INDICATORS (red, cornered)
    ========================================================= */
-
 .cardIndicators,
 .listItemIndicators{
   right: -1px !important;
@@ -4193,123 +4201,6 @@ for extended styling, use the add-on */
 /* =========================================================
    CARD SHAPE CONSISTENCY
    ========================================================= */
-
 .cardScalable{
   border-radius: var(--cornerRadius) !important;
 }
-/* =========================================================
-   FINAL KILL: grey scrolling fade overlay (Home + Library)
-   ========================================================= */
-
-/* 1) Kill fade pseudo-elements on common top wrappers */
-.homePage #appHost::before,
-.homePage #appHost::after,
-.libraryPage #appHost::before,
-.libraryPage #appHost::after,
-.homePage .skinBody::before,
-.homePage .skinBody::after,
-.libraryPage .skinBody::before,
-.libraryPage .skinBody::after,
-.homePage .mainAnimatedPage::before,
-.homePage .mainAnimatedPage::after,
-.libraryPage .mainAnimatedPage::before,
-.libraryPage .mainAnimatedPage::after,
-.homePage .page::before,
-.homePage .page::after,
-.libraryPage .page::before,
-.libraryPage .page::after{
-  content: none !important;
-  background: none !important;
-  background-image: none !important;
-  mask-image: none !important;
-  -webkit-mask-image: none !important;
-}
-
-/* 2) Also disable masks on these wrappers (some themes use mask-image instead of gradients) */
-.homePage #appHost,
-.libraryPage #appHost,
-.homePage .skinBody,
-.libraryPage .skinBody,
-.homePage .mainAnimatedPage,
-.libraryPage .mainAnimatedPage,
-.homePage .page,
-.libraryPage .page{
-  mask-image: none !important;
-  -webkit-mask-image: none !important;
-}
-
-/* 3) RE-APPLY fixed background LAST (so it can’t be overridden) */
-.homePage,
-.libraryPage{
-  background-image:
-    linear-gradient(rgba(0,0,0,var(--bgDim)), rgba(0,0,0,var(--bgDim))),
-    var(--allwaysBg) !important;
-  background-size: cover, cover !important;
-  background-position: center center !important;
-  background-repeat: no-repeat, no-repeat !important;
-  background-attachment: fixed, fixed !important;
-}
-/* =========================================================
-   REMOVE GREY GRADIENT / VIGNETTE WASH (Home + Library)
-   Keeps posters intact
-   ========================================================= */
-
-/* 1) Kill gradient/vignette overlays on the global background layers */
-.homePage ~ .backdropContainer,
-.homePage ~ .backgroundContainer,
-.libraryPage ~ .backdropContainer,
-.libraryPage ~ .backgroundContainer{
-  background: transparent !important;
-  background-image: none !important;
-  background-color: transparent !important;
-  filter: none !important;
-  opacity: 1 !important;
-}
-
-/* Safer selectors (because those containers are siblings in #reactRoot) */
-.homePage ~ .backdropContainer::before,
-.homePage ~ .backdropContainer::after,
-.homePage ~ .backgroundContainer::before,
-.homePage ~ .backgroundContainer::after,
-.libraryPage ~ .backdropContainer::before,
-.libraryPage ~ .backdropContainer::after,
-.libraryPage ~ .backgroundContainer::before,
-.libraryPage ~ .backgroundContainer::after{
-  content: none !important;
-  background: none !important;
-}
-
-/* 2) ElegantFin header blur/gradient can also add a wash */
-.homePage .skinHeader-withBackground,
-.libraryPage .skinHeader-withBackground,
-.homePage .skinHeader-blurred,
-.libraryPage .skinHeader-blurred{
-  background: transparent !important;
-  background-image: none !important;
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
-}
-
-/* 3) Re-apply YOUR background (Home + Library) LAST */
-.homePage,
-.libraryPage{
-  background-image:
-    linear-gradient(rgba(0,0,0,var(--bgDim)), rgba(0,0,0,var(--bgDim))),
-    var(--allwaysBg) !important;
-  background-size: cover, cover !important;
-  background-position: center center !important;
-  background-repeat: no-repeat, no-repeat !important;
-  background-attachment: fixed, fixed !important;
-}
-#reactRoot > .backdropContainer,
-#reactRoot > .backgroundContainer{
-  background: transparent !important;
-  background-image: none !important;
-}
-#reactRoot > .backdropContainer::before,
-#reactRoot > .backdropContainer::after,
-#reactRoot > .backgroundContainer::before,
-#reactRoot > .backgroundContainer::after{
-  content:none !important;
-}
-
