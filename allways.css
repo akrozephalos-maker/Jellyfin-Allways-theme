@@ -1,166 +1,37 @@
-/* =========================================================
-   allways.css – Jellyfin Always Theme (Base: ElegantFin)
-   TV-first, stable, update-safe
-   ========================================================= */
+/* Base Theme */
+@import url("https://cdn.jsdelivr.net/gh/lscambo13/ElegantFin@main/Theme/ElegantFin-jellyfin-theme-build-latest-minified.css");
 
-/* ========== 1) TOKENS / COLORS ========== */
 :root{
+  --allwaysBg: url("https://cdn.jsdelivr.net/gh/akrozephalos-maker/Jellyfin-Allways-theme@main/assets/bg.webp?v=99");
+  --bgDim: 0.45;
   --marcoRed: rgb(202,20,20);
-  --marcoRedHi: rgb(225,45,45);
-  --marcoRedLo: rgb(170,20,20);
-
-  /* Background image (will be added later) */
-  --marcoBg: url("https://cdn.jsdelivr.net/gh/DEIN_GITHUB_NAME/Jellyfin-Allways-theme@main/assets/bg.webp");
-  --marcoBgDim: 0.45;
-
-  /* ElegantFin overrides */
-  --highlightOutlineColor: var(--marcoRed);
-  --btnMiniPlayColor: var(--marcoRed);
-  --btnMiniPlayBorderColor: var(--marcoRed);
 }
 
-/* ========== 2) FIXED BACKGROUND (Home + Library, TV-safe) ========== */
-.homePage::before,
-.libraryPage::before{
+/* Background BEHIND the app (cannot cover posters) */
+html, body { background: #000 !important; }
+
+body::before{
   content:"";
   position: fixed;
   inset: 0;
-  background-image: var(--marcoBg);
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  opacity: var(--marcoBgDim);
+  background: var(--allwaysBg) center/cover no-repeat;
+  z-index: -2 !important;
   pointer-events: none;
-  z-index: 0;
 }
 
-.homePage,
-.libraryPage,
-.page,
-.mainAnimatedPage{
-  position: relative;
-  z-index: 1;
+body::after{
+  content:"";
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,var(--bgDim));
+  z-index: -1 !important;
+  pointer-events: none;
 }
 
-/* Improve readability on background */
-.homePage .paperList,
-.libraryPage .paperList,
-.homePage .visualCardBox,
-.libraryPage .visualCardBox{
-  background-color: rgba(30,40,54,.78) !important;
-}
-
-/* ========== 3) JELLYFISH-STYLE TOP NAV PILLS ========== */
-.buttonGroup,
-.homeTabs,
-.tabsContainer{
-  gap: .65em !important;
-}
-
-.buttonGroup .emby-button,
-.homeTabs .emby-button,
-.tabsContainer .emby-button{
-  border-radius: 999px !important;
-  padding: .75em 1.1em !important;
-  background: rgba(30,40,54,.70) !important;
-  border: 1px solid rgba(255,255,255,.10) !important;
-  color: rgba(209,213,219,.95) !important;
-}
-
-.buttonGroup .emby-button.emby-button-active,
-.homeTabs .emby-button.emby-button-active,
-.tabsContainer .emby-button.emby-button-active{
-  background: rgba(255,255,255,.85) !important;
-  color: rgba(10,15,31,.95) !important;
-  border-color: transparent !important;
-}
-
-/* ========== 4) CORNER INDICATORS (TOP-RIGHT, RED) ========== */
-.cardIndicators,
-.listItemIndicators{
-  right: -1px !important;
-  top: -1px !important;
-  left: auto !important;
-  bottom: auto !important;
-}
-
-.countIndicator,
-.playedIndicator{
-  border-radius: 0px 10px !important;
-  background: linear-gradient(to bottom, var(--marcoRedHi), var(--marcoRedLo)) !important;
-  color: #fff !important;
-  border: 1px solid rgba(0,0,0,.20) !important;
-  box-shadow: -1px 1px 6px rgba(0,0,0,.45),
-              inset 0 1px 2px rgba(255,255,255,.18) !important;
-}
-
-/* ========== 5) CORNER PLAY BUTTON (BOTTOM-RIGHT) ========== */
-.cardOverlayContainer > .cardOverlayFab-primary{
-  left: auto !important;
-  right: -1px !important;
-  top: auto !important;
-  bottom: -1px !important;
-
-  width: 2.6em !important;
-  height: 2.6em !important;
-
-  border-radius: 10px 0 0 0 !important;
-  overflow: hidden !important;
-
-  background: linear-gradient(to bottom, var(--marcoRedHi), var(--marcoRedLo)) !important;
-  border: 1px solid rgba(0,0,0,.20) !important;
-
-  box-shadow: -1px 1px 6px rgba(0,0,0,.45),
-              inset 0 1px 2px rgba(255,255,255,.18) !important;
-}
-
-.cardOverlayContainer > .cardOverlayFab-primary,
-.cardOverlayContainer > .cardOverlayFab-primary .material-icons,
-.cardOverlayContainer > .cardOverlayFab-primary i{
-  color: #fff !important;
-}
-
-/* ========== 6) FORCE RED FOCUS (OVERRIDE ELEGANTFIN WHITE) ========== */
+/* Force red focus border (override ElegantFin white) */
 .card:focus .cardBox.visualCardBox,
 .card:focus-visible .cardBox.visualCardBox,
 .card:focus .cardBox:not(.visualCardBox) .cardScalable,
 .card:focus-visible .cardBox:not(.visualCardBox) .cardScalable{
   border-color: var(--marcoRed) !important;
-}
-
-.layout-tv .card:focus .cardBox.visualCardBox,
-.layout-tv .card:focus-visible .cardBox.visualCardBox,
-.layout-tv .card:focus .cardBox:not(.visualCardBox) .cardScalable,
-.layout-tv .card:focus-visible .cardBox:not(.visualCardBox) .cardScalable{
-  border-color: var(--marcoRed) !important;
-}
-
-/* ========== 7) SAFE FOCUS RING (NO POSTER BREAKAGE) ========== */
-.cardImageContainer{
-  position: relative !important;
-  overflow: hidden !important;
-}
-
-.cardImageContainer::after{
-  content: none !important;
-}
-
-.cardBox:focus-within .cardImageContainer::after,
-.cardBox:focus .cardImageContainer::after,
-.cardBox:focus-visible .cardImageContainer::after{
-  content:"";
-  position:absolute;
-  inset: 0px;
-  border-radius: 0px 10px 10px 10px;
-  border: 2px solid var(--marcoRed);
-  box-shadow: inset 0 0 10px rgba(202,20,20,.22);
-  pointer-events:none;
-}
-
-/* ========== 8) TV / webOS SAFETY ========== */
-@media (hover:none), (pointer:coarse){
-  .layout-tv *:focus,
-  .layout-tv *:focus-visible{
-    outline: none !important;
-  }
 }
