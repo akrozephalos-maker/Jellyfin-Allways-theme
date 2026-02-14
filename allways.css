@@ -4301,3 +4301,15 @@ for extended styling, use the add-on */
   background-repeat: no-repeat, no-repeat !important;
   background-attachment: fixed, fixed !important;
 }
+#reactRoot > .backdropContainer,
+#reactRoot > .backgroundContainer{
+  background: transparent !important;
+  background-image: none !important;
+}
+#reactRoot > .backdropContainer::before,
+#reactRoot > .backdropContainer::after,
+#reactRoot > .backgroundContainer::before,
+#reactRoot > .backgroundContainer::after{
+  content:none !important;
+}
+
