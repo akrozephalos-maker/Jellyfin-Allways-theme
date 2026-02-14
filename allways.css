@@ -4249,3 +4249,22 @@ for extended styling, use the add-on */
   background-repeat: no-repeat, no-repeat !important;
   background-attachment: fixed, fixed !important;
 }
+/* =========================================================
+   HARD FIX: remove Jellyfin/ElegantFin backdrop layers
+   (these cause the grey scrolling fade)
+   ========================================================= */
+
+/* These two divs are global siblings in #reactRoot */
+.backdropContainer,
+.backgroundContainer{
+  display: none !important;
+}
+
+/* Safety: some builds still keep pseudo fades elsewhere */
+#reactRoot::before,
+#reactRoot::after,
+#appHost::before,
+#appHost::after{
+  content: none !important;
+  background: none !important;
+}
