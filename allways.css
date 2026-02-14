@@ -4061,21 +4061,25 @@ for extended styling, use the add-on */
 }
 
 /* ===============================
-   ALLWAYS: Background only (Home + Library)
+   ALLWAYS: Background fixed (Home + Library ONLY)
    =============================== */
 :root{
   --allwaysBg: url("https://cdn.jsdelivr.net/gh/akrozephalos-maker/Jellyfin-Allways-theme@main/assets/bg.webp");
   --bgDim: 0.52; /* 0..1 */
 }
 
-/* Make these pages transparent so our background can show */
+/* Make pages transparent so background shows */
 .homePage,
-.libraryPage{
+.libraryPage,
+.homePage .page,
+.libraryPage .page,
+.homePage .mainAnimatedPage,
+.libraryPage .mainAnimatedPage{
   background: transparent !important;
   background-color: transparent !important;
 }
 
-/* Apply background ONLY on Home + Library */
+/* Fixed background – NEVER scrolls */
 .homePage,
 .libraryPage{
   background-image:
@@ -4084,8 +4088,9 @@ for extended styling, use the add-on */
   background-size: cover, cover !important;
   background-position: center, center !important;
   background-repeat: no-repeat, no-repeat !important;
-  background-attachment: scroll, scroll !important; /* TV safe */
+  background-attachment: fixed, fixed !important; /* <- key */
 }
+
 
 /* Some Jellyfin builds wrap page content in .page/.mainAnimatedPage
    but we only want it while we are on Home/Library */
