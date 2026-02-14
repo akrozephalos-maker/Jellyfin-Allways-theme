@@ -4250,21 +4250,54 @@ for extended styling, use the add-on */
   background-attachment: fixed, fixed !important;
 }
 /* =========================================================
-   HARD FIX: remove Jellyfin/ElegantFin backdrop layers
-   (these cause the grey scrolling fade)
+   REMOVE GREY GRADIENT / VIGNETTE WASH (Home + Library)
+   Keeps posters intact
    ========================================================= */
 
-/* These two divs are global siblings in #reactRoot */
-.backdropContainer,
-.backgroundContainer{
-  display: none !important;
+/* 1) Kill gradient/vignette overlays on the global background layers */
+.homePage ~ .backdropContainer,
+.homePage ~ .backgroundContainer,
+.libraryPage ~ .backdropContainer,
+.libraryPage ~ .backgroundContainer{
+  background: transparent !important;
+  background-image: none !important;
+  background-color: transparent !important;
+  filter: none !important;
+  opacity: 1 !important;
 }
 
-/* Safety: some builds still keep pseudo fades elsewhere */
-#reactRoot::before,
-#reactRoot::after,
-#appHost::before,
-#appHost::after{
+/* Safer selectors (because those containers are siblings in #reactRoot) */
+.homePage ~ .backdropContainer::before,
+.homePage ~ .backdropContainer::after,
+.homePage ~ .backgroundContainer::before,
+.homePage ~ .backgroundContainer::after,
+.libraryPage ~ .backdropContainer::before,
+.libraryPage ~ .backdropContainer::after,
+.libraryPage ~ .backgroundContainer::before,
+.libraryPage ~ .backgroundContainer::after{
   content: none !important;
   background: none !important;
+}
+
+/* 2) ElegantFin header blur/gradient can also add a wash */
+.homePage .skinHeader-withBackground,
+.libraryPage .skinHeader-withBackground,
+.homePage .skinHeader-blurred,
+.libraryPage .skinHeader-blurred{
+  background: transparent !important;
+  background-image: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* 3) Re-apply YOUR background (Home + Library) LAST */
+.homePage,
+.libraryPage{
+  background-image:
+    linear-gradient(rgba(0,0,0,var(--bgDim)), rgba(0,0,0,var(--bgDim))),
+    var(--allwaysBg) !important;
+  background-size: cover, cover !important;
+  background-position: center center !important;
+  background-repeat: no-repeat, no-repeat !important;
+  background-attachment: fixed, fixed !important;
 }
