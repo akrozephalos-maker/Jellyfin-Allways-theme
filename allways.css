@@ -4060,8 +4060,24 @@ for extended styling, use the add-on */
   --cornerRadius: 10px;
 }
 
-/* ---- Background (NO overlays, NO z-index tricks) ---- */
-body, .skinBody, #appHost{
+/* ===============================
+   ALLWAYS: Background only (Home + Library)
+   =============================== */
+:root{
+  --allwaysBg: url("https://cdn.jsdelivr.net/gh/akrozephalos-maker/Jellyfin-Allways-theme@main/assets/bg.webp");
+  --bgDim: 0.52; /* 0..1 */
+}
+
+/* Make these pages transparent so our background can show */
+.homePage,
+.libraryPage{
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+/* Apply background ONLY on Home + Library */
+.homePage,
+.libraryPage{
   background-image:
     linear-gradient(rgba(0,0,0,var(--bgDim)), rgba(0,0,0,var(--bgDim))),
     var(--allwaysBg) !important;
@@ -4070,6 +4086,17 @@ body, .skinBody, #appHost{
   background-repeat: no-repeat, no-repeat !important;
   background-attachment: scroll, scroll !important; /* TV safe */
 }
+
+/* Some Jellyfin builds wrap page content in .page/.mainAnimatedPage
+   but we only want it while we are on Home/Library */
+.homePage .page,
+.libraryPage .page,
+.homePage .mainAnimatedPage,
+.libraryPage .mainAnimatedPage{
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
 
 /* ---- Red focus / selection (kills white border) ---- */
 .card:focus .cardBox.visualCardBox,
