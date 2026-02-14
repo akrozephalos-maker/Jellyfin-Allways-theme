@@ -4201,3 +4201,7 @@ for extended styling, use the add-on */
   content: none !important;
   background: none !important;
 }
+.homePage .dashboardFooter,
+.libraryPage .dashboardFooter{
+  background: transparent !important;
+}
