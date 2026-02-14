@@ -4204,3 +4204,213 @@ for extended styling, use the add-on */
 .cardScalable{
   border-radius: var(--cornerRadius) !important;
 }
+/* =========================================================
+   NUCLEAR (but safe): kill any root-level gradient overlays
+   Keep ONLY the actual app host (#appHost)
+   ========================================================= */
+
+/* Make every direct child of #reactRoot transparent EXCEPT the app itself */
+#reactRoot > *:not(#appHost){
+  background: transparent !important;
+  background-image: none !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  filter: none !important;
+  opacity: 1 !important;
+  mask-image: none !important;
+  -webkit-mask-image: none !important;
+}
+
+/* And kill pseudo overlays on those root siblings */
+#reactRoot > *:not(#appHost)::before,
+#reactRoot > *:not(#appHost)::after{
+  content: none !important;
+  background: none !important;
+  background-image: none !important;
+}
+
+/* Extra safety: some washes are attached to #reactRoot/#appHost pseudos */
+#reactRoot::before,
+#reactRoot::after,
+#appHost::before,
+#appHost::after{
+  content: none !important;
+  background: none !important;
+  background-image: none !important;
+}
+
+/* Re-apply YOUR background (Home + Library) LAST */
+.homePage,
+.libraryPage{
+  background-image:
+    linear-gradient(rgba(0,0,0,var(--bgDim)), rgba(0,0,0,var(--bgDim))),
+    var(--allwaysBg) !important;
+  background-size: cover, cover !important;
+  background-position: center center !important;
+  background-repeat: no-repeat, no-repeat !important;
+  background-attachment: fixed, fixed !important;
+}
+
+/* ~~~~~~~~~~~~~~~~~~~~ LAYOUT - HEADER ~~~~~~~~~~~~~~~~~~~~ */
+
+/* == Header Base Styling == */
+/* Basic transparency and padding for the main header. */
+.skinHeader, .skinHeader-withBackground.osdHeader {
+    background-color: transparent !important;
+    background: transparent !important;
+}
+.layout-desktop .skinHeader,
+.layout-tv .skinHeader {
+    padding-top: 1.5em !important; /* Top padding for desktop and TV layouts */
+}
+.layout-tv .skinHeader {
+    padding-bottom: 10px !important; /* Specific bottom padding for TV layout */
+}
+
+/* == ZestyTheme-Inspired Header Tabs & Right Section == */
+/* Styles for header tabs and the right-aligned header items, creating a pill-shaped, blurred effect. */
+.headerTabs,       /* Container for navigation tabs within the header */
+.headerRight       /* Container for icons/buttons on the right of the header */
+{
+    background: var(--header-background-color) !important; /* Use a variable for background, ensure it's defined (e.g., semi-transparent white) */
+    border-radius: 100px !important; /* Creates the pill shape */
+    color: var(--secondary-background-color) !important; /* Text color, assuming a light header background means dark text */
+    backdrop-filter: blur(50px) !important; /* Strong blur effect */
+    box-shadow: 0px 0px 10px 10px rgba(0,0,0,0.25) !important;
+}
+
+/* == Header Button Hover & Focus (Right Section) == */
+/* Accent color for icon buttons in the right header section on hover/focus. */
+.headerRight .paper-icon-button-light:hover,
+.headerRight .paper-icon-button-light:hover:not(:disabled),
+.headerRight .paper-icon-button-light:focus,
+.headerRight .paper-icon-button-light:focus:not(:disabled)
+{
+    color: var(--primary-accent-color) !important;
+}
+/* == Header Text Color & Positioning == */
+/* Styling for text elements within the header tabs/buttons. */
+.homeLibraryText,       /* Text for the "Home" or library buttons */
+.emby-button-foreground /* General foreground (text/icon) for Emby buttons */
+{
+	color: var(--secondary-background-color) !important; /* Dark text, assuming light header background */
+    transition: color 0.2s ease; /* Smooth color transition on hover/state change */
+    top: unset !important;       /* Resets any default vertical positioning */
+    position: relative;          /* Ensures proper behavior within flex containers */
+}
+
+/* == Header Tab Button Styling == */
+/* Styling for individual tab buttons and the home/library button in the header. */
+#indexPage .homeLibraryButton, /* Home button specifically on the index page */
+.emby-tab-button               /* General tab buttons */
+{
+	background: transparent !important; /* Start with a transparent background */
+	min-width: 0 !important;            /* Allow shrinking */
+	max-width: 50vw !important;         /* Limit maximum width */
+    width: fit-content !important;      /* Fit width to content */
+    transition: background-color 0.2s ease; /* Smooth background transition */
+    border-radius: 100px !important;    /* Start with applied Border Radius */
+}
+/* Desktop-specific margin for tab/home buttons. */
+.layout-desktop .homeLibraryButton,
+.layout-desktop .emby-tab-button {
+	margin: .5em !important;
+}
+/* == Header Tab Button Hover/Focus Effects == */
+/* Defines hover and focus appearance for header tabs, using primary accent. */
+.raised:hover .homeLibraryText,
+.emby-tab-button:hover .emby-button-foreground {
+	color: var(--text-color) !important; /* Text color on hover (e.g., white for contrast with accent background) */
+	transition: color 0.2s ease;
+}
+#indexPage .homeLibraryButton:hover,
+.emby-tab-button:hover {
+	border-radius: 100px !important; /* Maintain pill shape on hover */
+	background-color: var(--primary-accent-color) !important; /* Use primary accent for background on hover */
+}
+
+/* Smooth scrolling for tab sliders */
+.scrollSlider,
+.emby-scroller {
+	scroll-behavior: smooth !important;
+	-webkit-overflow-scrolling: touch !important;
+
+}
+/* Remove default outline/shadow on focus for a cleaner look. */
+.raised.homeLibraryButton.emby-button:hover,
+.emby-tab-button:hover,
+.homeLibraryButton:focus {
+	outline: none !important;
+	box-shadow: none !important;
+}
+/* Remove default underline/after-element effect on tab hover. */
+.emby-tab-button:hover::after {
+    background: unset !important;
+}
+
+/* == Active Header Tab Styling == */
+/* Styles for the currently active header tab. */
+.emby-tab-button-active {
+  background-color: var(--primary-accent-color) !important;
+  border-radius: 100px !important; /* Pill shape */
+  color: var(--text-color) !important; /* Text color for active tab (e.g., white) */
+}
+.emby-tab-button-active > .emby-button-foreground {
+  color: var(--text-color) !important; /* Ensure foreground text also matches active state color */
+}
+
+/* == Header Tabs & Right Section Positioning (Desktop) == */
+/* Fine-tunes positioning and sizing for desktop header elements. */
+.layout-tv .headerTabs, .layout-desktop .headerTabs {
+    margin-bottom: 2vh !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    margin-top: -58px !important; /* Negative margin to pull it up relative to other header elements */
+    font-size: 12px !important;   /* Custom font size for tabs */
+    width: fit-content !important;
+}
+.layout-tv .headerRight, .layout-desktop .headerRight {
+    height: 45px !important;
+    padding: 2px 5px !important;
+    position: absolute !important; /* Absolute positioning for precise placement */
+    right: 12px !important;
+}
+.layout-tv .emby-tab-button {
+    height: 40px !important;
+	font-size: 15px;
+}
+/* Ensures tab buttons align content correctly and have appropriate padding. */
+.emby-tab-button {
+    height: 30px !important;     /* Match a consistent height */
+    display: inline-flex !important; /* For proper alignment of content */
+    align-items: center !important;    /* Vertical centering */
+    justify-content: center !important;/* Horizontal centering */
+    padding: 0 15px !important;  /* Horizontal padding within tabs */
+}
+/* --- End of Zesty Header Styles Integration --- */
+
+/* == Header Left Section Styling (Desktop) == */
+/* Styling for the left part of the header, typically containing back/menu buttons. */
+.layout-desktop .headerLeft:not(.libraryDocument:has(.videoPlayerContainer) .headerLeft) { /* Exclude when video player is active */
+    padding: 2px !important;
+    top: -3px !important; /* Slight upward adjustment */
+    border-radius: 5px !important;
+    flex-grow: 0 !important; /* Prevent growing to fill space */
+    -webkit-flex-grow: 0 !important;
+}
+/* Fallback for browsers not supporting :has() selector (e.g., older Jellyfin Media Player versions). */
+@supports not selector(:has(*)) {
+    .layout-desktop .headerLeft {
+        padding: 2px !important;
+        top: -3px !important;
+        background-color: transparent !important; /* Keep transparent for fallback to match modern browser behavior */
+        border-radius: 50px !important; /* Different rounding for fallback */
+    }
+}
+/* == Header Button Icon Alignment == */
+/* Adjusts vertical alignment of icons within header buttons for Mobile. */
+
+.layout-mobile .emby-button-foreground {
+    text-shadow: -2px 2px 12px #000000eb !important; /* Text shadow for mobile header icons for readability */
+}
+
