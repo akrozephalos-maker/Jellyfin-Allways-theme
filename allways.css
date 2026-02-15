@@ -1,473 +1,116 @@
 /* =========================================================
-   ALLWAYS.CSS – Best-Of Module Build (TV-first / webOS safe)
-   - No full theme imports
-   - No :has()
-   - Stable RED focus ring (outline)
-   - ElegantFin-ish cards + spacing
-   - Clean detail pages (Infinitv-ish layout goals)
-   - Finimalism-ish player OSD without hover gradient masks
+   INFINITV TV READABILITY PATCH (only TV)
+   Ziel: Couch-Lesbarkeit hoch, Theme-Design bleibt.
    ========================================================= */
-
-/* =========================================================
-   0) CORE VARIABLES + TV READABILITY
-   ========================================================= */
-:root{
-  --allwaysRed: rgb(202,20,20);
-
-  /* Base colors */
-  --allwaysBgColor: #0c0f14;
-  --allwaysPanel: rgba(0,0,0,.45);
-
-  /* Text */
-  --tvText: rgba(255,255,255,.92);
-  --tvTextSoft: rgba(255,255,255,.72);
-  --tvLineHeight: 1.35;
-
-  /* Cards */
-  --cardRadius: 14px;
-  --cardShadow: 0 10px 28px rgba(0,0,0,.55);
-  --cardShadowHover: 0 14px 40px rgba(0,0,0,.70);
-  --cardGap: 18px;
-
-  /* Focus ring (TV-safe) */
-  --focusWidth: 4px;
-  --focusOffset: 3px;
-}
-
-html, body{
-  background: var(--allwaysBgColor) !important;
-  color: var(--tvText) !important;
-}
-
-body{ line-height: var(--tvLineHeight) !important; }
-
-/* TV/WebOS heuristic: hover:none + pointer:coarse */
 @media (hover: none) and (pointer: coarse){
-  html{ font-size: 18px !important; }
-}
 
-/* Kill tap highlight */
-*{ -webkit-tap-highlight-color: transparent !important; }
+  /* 1) Global TV font scale */
+  .layout-tv{ font-size: 20px !important; } /* 18–22 je nach Couch */
 
-/* =========================================================
-   1) BACKDROP CLEAN – remove gradients/masks/grey overlays
-   ========================================================= */
-.backdropImage,
-.backgroundContainer,
-.detailPageBackdrop,
-.detailPageBackdropImage,
-.skinHeader::before,
-.skinHeader::after,
-.detailPagePrimaryContainer::before,
-.detailPagePrimaryContainer::after,
-.libraryPage::before,
-.homePage::before{
-  background-image: none !important;
-  -webkit-mask-image: none !important;
-  mask-image: none !important;
-}
-
-.backdropContainer,
-.detailPagePrimaryContainer,
-.detailPageSecondaryContainer{
-  background: transparent !important;
-}
-
-.detailPageContent,
-.itemDetailPage,
-.detailPageWrapper{
-  text-shadow: 0 2px 10px rgba(0,0,0,.70);
-}
-
-/* Make panels readable without overlays */
-.detailPagePrimaryContainer{
-  background: var(--allwaysPanel) !important;
-  border-radius: 18px !important;
-  padding: 18px 22px !important;
-  backdrop-filter: none !important; /* avoid flicker on weak GPUs */
-}
-
-/* =========================================================
-   2) NAV – jellyfish-ish top bar (clean, active red)
-   ========================================================= */
-.skinHeader{
-  background: rgba(0,0,0,.55) !important;
-  backdrop-filter: none !important;
-}
-
-.headerTabs .emby-tab-button{
-  font-size: 1.05rem !important;
-  font-weight: 700 !important;
-  color: var(--tvTextSoft) !important;
-}
-
-.headerTabs .emby-tab-button.emby-tab-button-active{
-  color: #fff !important;
-  border-bottom: 3px solid var(--allwaysRed) !important;
-}
-
-/* =========================================================
-   3) GLOBAL FOCUS – red ring that actually works on webOS
-   ========================================================= */
-:where(a, button, [tabindex], .focusable, .itemAction, .emby-button):focus,
-:where(a, button, [tabindex], .focusable, .itemAction, .emby-button):focus-visible{
-  outline: var(--focusWidth) solid var(--allwaysRed) !important;
-  outline-offset: var(--focusOffset) !important;
-}
-
-/* Buttons with "show-focus" */
-.emby-button.show-focus:focus,
-.paper-icon-button-light.show-focus:focus,
-.emby-tabs .emby-button.show-focus:focus{
-  background-color: rgba(202,20,20,.28) !important;
-  color: #fff !important;
-  outline: var(--focusWidth) solid var(--allwaysRed) !important;
-  outline-offset: 2px !important;
-}
-
-/* =========================================================
-   4) CARDS – ElegantFin-ish (radius/shadow/spacing)
-   ========================================================= */
-
-/* Container spacing */
-.itemsContainer,
-.verticalSection,
-.sections,
-.homeSectionsContainer{
-  gap: var(--cardGap) !important;
-}
-
-/* Center cards in rows (from your snippet) */
-[dir="ltr"] .itemsContainer > .card > .cardBox{
-  margin-left: auto !important;
-  margin-right: auto !important;
-}
-
-/* Card base */
-.cardBox,
-.card,
-.cardScalable,
-.cardImageContainer{
-  border-radius: var(--cardRadius) !important;
-}
-
-.cardBox{
-  box-shadow: var(--cardShadow) !important;
-  background: rgba(0,0,0,.10) !important;
-  overflow: hidden !important;
-  transition: transform .12s ease, box-shadow .12s ease, filter .12s ease !important;
-}
-
-/* Card shell */
-.cardScalable{
-  border-radius: var(--cardRadius) !important;
-  border: 2px solid rgba(255,255,255,.14) !important;
-  overflow: hidden !important;
-  box-shadow: 0 0 .25em 0 rgba(0,0,0,.40) !important;
-  transition: transform 125ms ease, filter 125ms ease, box-shadow 125ms ease !important;
-}
-
-/* Visual cards/paperList containers (subtle) */
-.visualCardBox,
-.paperList{
-  background-color: rgba(255,255,255,.04) !important;
-  border-radius: var(--cardRadius) !important;
-  border: 1px solid rgba(255,255,255,.10) !important;
-  box-shadow: none !important;
-  overflow: hidden !important;
-}
-
-.layout-desktop .visualCardBox{
-  border-width: 2px !important;
-}
-
-.visualCardBox .cardScalable{
-  border-width: 0 0 1px 0 !important;
-  border-radius: 0 !important;
-  border-color: rgba(255,255,255,.12) !important;
-}
-
-/* Card image hover zoom (PC only) */
-.cardImageContainer{
-  transition: transform 0.375s ease !important;
-}
-@media (hover: hover) and (pointer: fine){
-  .cardBox:hover{
-    transform: translateY(-2px) !important;
-    box-shadow: var(--cardShadowHover) !important;
-    filter: brightness(1.06) !important;
+  /* 2) Detail pages: title + meta + overview bigger */
+  .layout-tv #itemDetailPage .itemName,
+  .layout-tv .itemDetailPage .itemName{
+    font-size: 2.2rem !important;
+    font-weight: 800 !important;
+    line-height: 1.15 !important;
   }
-  .card-hoverable:hover .cardImageContainer{ transform: scale(1.025) !important; }
-  .card-hoverable:hover .cardScalable{ transform: scale(1.02) !important; }
-  .card-hoverable .cardScalable:active{ transform: scale(1) !important; transition: transform 0.075s ease !important; }
-}
 
-/* Card text readability */
-.cardText,
-.cardText-firstLine,
-.cardText-secondary{
-  color: var(--tvText) !important;
-}
+  .layout-tv #itemDetailPage .itemMiscInfo,
+  .layout-tv .itemDetailPage .itemMiscInfo{
+    font-size: 1.05rem !important;
+    line-height: 1.35 !important;
+    opacity: .9 !important;
+  }
 
-.cardText-firstLine{
-  font-weight: 650 !important;
-  letter-spacing: .2px !important;
-  display: -webkit-box !important;
-  -webkit-line-clamp: 2 !important;
-  -webkit-box-orient: vertical !important;
-  overflow: hidden !important;
-}
+  .layout-tv #itemDetailPage .itemOverview,
+  .layout-tv .itemDetailPage .itemOverview,
+  .layout-tv #itemDetailPage .overview,
+  .layout-tv .itemDetailPage .overview{
+    font-size: 1.15rem !important;
+    line-height: 1.5 !important;
+    max-width: 75ch !important;
+  }
 
-.cardText-secondary{
-  color: var(--tvTextSoft) !important;
-}
+  /* 3) Buttons bigger + more spacing */
+  .layout-tv #itemDetailPage .emby-button,
+  .layout-tv .itemDetailPage .emby-button{
+    font-size: 1.05rem !important;
+    padding: .85em 1.15em !important;
+    border-radius: 14px !important;
+  }
 
-/* TV: bigger spacing + text */
-@media (hover: none) and (pointer: coarse){
-  :root{ --cardGap: 22px; }
-  .cardText{ font-size: 1.05rem !important; }
-  .cardText-secondary{ font-size: .95rem !important; }
-}
+  /* 4) Tabs / section titles bigger */
+  .layout-tv .sectionTitle{
+    font-size: 1.2rem !important;
+    margin-top: .7em !important;
+  }
 
-/* Bottom padding spacing (your snippet) */
-.cardBox-bottompadded{ margin-bottom: .5em !important; }
-@media (max-width: 50em){
-  .cardBox-bottompadded{ margin-bottom: .25em !important; }
-}
+  /* 5) Episode list / items bigger */
+  .layout-tv .listItem{
+    padding-top: .75em !important;
+    padding-bottom: .75em !important;
+  }
 
-/* Alignment fix */
-.vertical-wrap:not(.centered){
-  justify-content: flex-start !important;
-}
+  .layout-tv .listItemBodyText,
+  .layout-tv .listItemBodyText-secondary,
+  .layout-tv .secondary{
+    font-size: 1.05rem !important;
+    line-height: 1.45 !important;
+  }
 
-/* Indicators (optional keep) */
-.countIndicator,
-.fullSyncIndicator,
-.mediaSourceIndicator{
-  background: rgb(31, 80, 189) !important;
-}
+  /* 6) Dialogs / select menus (audio/subtitle) bigger */
+  .layout-tv .emby-select,
+  .layout-tv .detailTrackSelect{
+    font-size: 1.05rem !important;
+    padding: .5em 2.2em .5em .6em !important;
+  }
 
-/* Card focus (ElegantFin had white border -> use red outline) */
-.card:focus .cardBox.visualCardBox,
-.card:focus .cardBox:not(.visualCardBox) .cardScalable,
-.cardBox:focus-within,
-.cardScalable:focus-within{
-  outline: var(--focusWidth) solid var(--allwaysRed) !important;
-  outline-offset: var(--focusOffset) !important;
-  filter: brightness(1.08) !important;
-  box-shadow: 0 0 0 2px rgba(0,0,0,.65) !important;
-}
+  /* 7) Player OSD text bigger */
+  .layout-tv .osdText,
+  .layout-tv .osdTitle,
+  .layout-tv .osdSecondaryText{
+    font-size: 1.05rem !important;
+  }
 
+  /* 8) Subtitles bigger (couch) */
+  video::cue{
+    font-size: 1.35em !important;
+    text-shadow: 0 3px 10px rgba(0,0,0,.85) !important;
+  }
+}
 /* =========================================================
-   5) OVERLAY PLAY BUTTON – corner button (red)
+   Badge/Counter (z.B. "93") -> oben rechts in die Ecke
    ========================================================= */
-.cardOverlayContainer{
+
+/* Wichtig: Parent muss relative sein */
+.cardBox,
+.cardScalable,
+.cardOverlayContainer,
+.cardIndicators{
   position: relative !important;
 }
 
-/* Primary play FAB position (stable, no theme vars) */
-.cardOverlayContainer > .cardOverlayFab-primary{
-  top: auto !important;
-  left: .6em !important;
-  right: auto !important;
-  bottom: .6em !important;
+/* Der Zähler selbst */
+.countIndicator,
+.unplayedCountIndicator,
+.mediaSourceIndicator,
+.fullSyncIndicator{
+  position: absolute !important;
+  top: .45em !important;
+  right: .45em !important;
+  left: auto !important;
+  bottom: auto !important;
   margin: 0 !important;
-  z-index: 2 !important;
+  z-index: 30 !important;
 }
 
-.cardOverlayContainer > .cardOverlayFab-primary,
-.listItemImageButton,
-.layout-mobile .cardOverlayButton-br:not([data-action="menu"]) > .cardOverlayButtonIcon{
-  background-color: rgba(202,20,20,.92) !important;
-  color: #fff !important;
-  border: 1px solid rgba(255,255,255,.18) !important;
-  font-size: 75% !important;
-  box-shadow: 0 10px 20px rgba(0,0,0,.45) !important;
-}
-
-/* Hide menu overlay button like your snippet */
-.cardOverlayButton-br .cardOverlayButton-hover[data-action="menu"],
-.layout-desktop .listItemButton[data-action="menu"]{
-  display: none !important;
-}
-
-/* =========================================================
-   6) DETAILS PAGES – content/layout (from your snippet, TV safe)
-   ========================================================= */
-
-/* Track Select */
-.detailTrackSelect{
-  padding: .35em 1.9em .35em .35em !important;
-}
-
-/* Media Description spacing */
-.overview.detail-clamp-text{
-  margin-top: .5em !important;
-  margin-bottom: .5em !important;
-}
-
-/* Director & Studio group */
-.itemDetailsGroup{
-  margin-top: .5em !important;
-  padding-bottom: 1em !important;
-}
-
-/* Desktop Layout */
-.layout-desktop .detailPagePrimaryContent{
-  padding-top: 1em !important;
-  padding-bottom: 1em !important;
-}
-
-.layout-desktop .detailPageSecondaryContainer{
-  padding-left: 3vw !important;
-  padding-right: 3vw !important;
-}
-.layout-desktop .detailPageSecondaryContainer .detailPageContent{
-  padding-left: 0 !important;
-  padding-right: 0 !important;
-}
-
-/* TV Layout (no :has()) */
-.layout-tv .detailPagePrimaryContent{
-  padding-top: 0 !important;
-  padding-bottom: 0 !important;
-  padding-right: 0 !important;
-}
-
-/* Keep your poster spacing idea */
-.layout-tv [dir="ltr"] .detailRibbon,
-.layout-tv .detailPagePrimaryContent{
-  padding-left: 29vw !important;
-}
-
-/* Tracks & Subtitles width */
-.layout-tv .trackSelections{
-  max-width: 100% !important;
-  width: 65% !important;
-  padding-top: .5em !important;
-  padding-bottom: .5em !important;
-}
-
-.layout-tv .trackSelections .selectLabelFocused{
-  color: #fff !important;
-  font-weight: 650 !important;
-}
-
-/* Secondary container TV */
-.layout-tv .detailPageSecondaryContainer{
-  padding-top: 2em !important;
-}
-.layout-tv .detailPageSecondaryContainer .detailPageContent{
-  padding-left: 0 !important;
-  padding-right: 0 !important;
-}
-
-/* Mobile Layout */
-.layout-mobile .detailPagePrimaryContent{
-  padding-top: 0 !important;
-  padding-bottom: 0 !important;
-  padding-left: 3% !important;
-  padding-right: 3% !important;
-}
-.layout-mobile .detailPagePrimaryContent .trackSelections,
-.layout-mobile .detailPagePrimaryContent .detailSectionContent,
-.layout-mobile .detailPagePrimaryContent .itemDetailsGroup{
-  padding-left: 2vw !important;
-  padding-right: 2vw !important;
-}
-
-.layout-mobile .trackSelections{ padding-top: 1em !important; }
-
-.layout-mobile .detailPageSecondaryContainer{ padding-top: 0 !important; }
-.layout-mobile .detailPageSecondaryContainer .detailPageContent{
-  padding-left: 3% !important;
-  padding-right: 3% !important;
-}
-
-/* Detail typography boost */
-.itemName,
-.detailPagePrimaryContainer .nameContainer{
-  font-size: clamp(1.4rem, 2.4vw, 2.2rem) !important;
-  font-weight: 800 !important;
-  color: #fff !important;
-}
-
-.itemMiscInfo,
-.detailPagePrimaryContainer .itemOverview,
-.itemOverview,
-.overview.detail-clamp-text{
-  color: var(--tvTextSoft) !important;
-  font-size: 1.05rem !important;
-  line-height: 1.45 !important;
-  max-width: 78ch !important;
-}
-
-/* Episode list focus readability */
-.listItem:focus-within,
-.listItem:hover{
-  background: rgba(255,255,255,.06) !important;
-  border-left: 4px solid var(--allwaysRed) !important;
-}
-
-/* =========================================================
-   7) PLAYER – finimalism-ish, bigger controls, readable subs
-   ========================================================= */
-.videoOsdBottom{
-  padding-top: 1em !important;
-  background: linear-gradient(to top, rgba(0,0,0,.78), rgba(0,0,0,0)) !important;
-}
-
-.skinHeader-withBackground.osdHeader{
-  height: 5em !important;
-}
-
-progress{
-  background: rgba(0,0,0,.5) !important;
-}
-
-/* inputs */
-.emby-input,
-.emby-textarea{
-  padding: .4em .55em !important;
-}
-.emby-select{
-  padding: .35em 1.9em .35em .35em !important;
-}
-.selectArrow{
-  margin-top: 1.05em !important;
-}
-
-/* section title */
-.sectionTitle{
-  margin-left: 0 !important;
-  margin-top: .5em !important;
-  font-weight: 650 !important;
-}
-
-/* OSD text spacing */
-.osdTextContainer{
-  margin: 0 !important;
-  margin-top: .2em !important;
-  padding-left: .5em !important;
-  padding-right: .5em !important;
-}
-
-/* Subtitles: couch distance */
-video::cue{
-  font-size: 1.25em !important;
-  text-shadow: 0 3px 10px rgba(0,0,0,.85) !important;
-}
-
-/* =========================================================
-   8) SMALL CLEANUPS (optional but useful)
-   ========================================================= */
-
-/* Hide big "?" default card text if you dislike it */
-.cardImageContainer > .cardDefaultText{
-  color: transparent !important;
-}
-
-/* Round user button */
-.headerUserButtonRound{
-  border-radius: 50px !important;
+/* Optional: auf TV etwas größer / besser lesbar */
+@media (hover: none) and (pointer: coarse){
+  .countIndicator,
+  .unplayedCountIndicator{
+    top: .55em !important;
+    right: .55em !important;
+    transform: scale(1.08) !important;
+    transform-origin: top right !important;
+  }
 }
