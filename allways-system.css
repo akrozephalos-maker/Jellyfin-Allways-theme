@@ -1,18 +1,24 @@
 /*
 ============================================================================
-   System & Dialogs  (ALLWAYS)
+   System & Dialogs
 ============================================================================
 */
 
-/* TV-Layout: bigger / couch readable */
+/* Smaller TV-Layout */
 .layout-tv {
-    font-size: 130% !important; /* was 110% */
+    font-size: 110% !important;
 }
 
 /* Progress Ring */
-.progressring { margin: .4em; }
-.progressring-bg { display: none; }
-.progressring-spiner { border-width: .35em; }
+.progressring {
+    margin: .4em;
+}
+.progressring-bg {
+    display: none;
+}
+.progressring-spiner {
+    border-width: .35em;
+}
 
 /* Toast: Center */
 .toast {
@@ -27,7 +33,7 @@
     text-align: center;
 }
 
-/* Spinner Color */
+/* Spinner Color */ 
 .mdl-spinner__layer-1,
 .mdl-spinner__layer-2,
 .mdl-spinner__layer-3,
@@ -42,11 +48,16 @@
 ============================================================================
 */
 
+/* Main Drawer */
 .mainDrawer {
     margin-top: 3.9em;
     background-color: rgba(0, 0, 0, 0.9) !important;
 }
-.navMenuOptionText { margin-top: 0; }
+
+/* Main Drawer: Menu Options */
+.navMenuOptionText {
+    margin-top: 0;
+}
 
 /*
 ============================================================================
@@ -54,11 +65,16 @@
 ============================================================================
 */
 
+/* Collapsible Menu */
 .collapseContent {
     padding-top: 0em;
     padding-bottom: 0em;
 }
-.actionSheetContent .listItem { padding: .5em; }
+
+/* Action Sheet: Item size */
+.actionSheetContent .listItem {
+    padding: .5em;
+}
 
 /*
 ============================================================================
@@ -66,22 +82,29 @@
 ============================================================================
 */
 
+/* Scrollbar: Style */
 * {
     scrollbar-width: thin;
     scrollbar-color: var(--accent80) rgba(0, 0, 0, var(--headeropacity)) !important;
 }
 
-::-webkit-scrollbar-track { background: rgba(0, 0, 0, var(--headeropacity)) !important; }
+::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, var(--headeropacity)) !important;
+}
 ::-webkit-scrollbar-thumb {
     background: var(--accent80) !important;
     border-radius: 4px;
     border: 1px solid transparent;
     background-clip: content-box;
 }
-::-webkit-scrollbar-corner  { background: var(--accent80) !important; }
+::-webkit-scrollbar-corner  {
+    background: var(--accent80) !important;
+}
 
 /* Scrollbar: Hide (TV) */
-.layout-tv ::-webkit-scrollbar { display: none; }
+.layout-tv ::-webkit-scrollbar {
+    display: none;
+}
 
 #loginPage,
 .layout-tv {
@@ -97,10 +120,14 @@
 */
 
 /* Header: Don't scroll (TV) */
-.layout-tv .skinHeader { position: fixed !important; }
+.layout-tv .skinHeader {
+    position: fixed !important;
+}
 
 /* Header: Black (Mobile) */
-.layout-mobile .skinHeader { background: rgba(0, 0, 0, 1) !important; }
+.layout-mobile .skinHeader {
+    background: rgba(0, 0, 0, 1) !important;
+}
 
 /* Header: Fixed size (Mobile) */
 @media (max-width: 100em) {
@@ -109,7 +136,9 @@
         padding-bottom: 0.5em;
         height: 2.9em;
     }
-    .layout-mobile .emby-tab-button { padding-top: 0em; }
+    .layout-mobile .emby-tab-button {
+        padding-top: 0em;
+    }
 }
 
 /* Header: Size & Alignment */
@@ -123,14 +152,16 @@
     padding: .3em !important;
 }
 
-/* Header: Page Title & Time */
-.pageTitle { font-weight: bold; }
+/* Hader: Page Title & Time */
+.pageTitle {
+    font-weight: bold;
+}
 .currentTimeText {
     font-size: 110% !important;
     font-weight: bold;
 }
 
-/* Header Section Tabs */
+/* Header Section Tabs: Stay in Header with invisible scroll */
 .layout-tv .headerTabs.sectionTabs,
 .layout-desktop .headerTabs.sectionTabs {
     font-size: 110% !important;
@@ -154,6 +185,9 @@
 ============================================================================
 */
 
+/* Buttons: Sign In, Save, Cancel...
+--------------------------------------------------------------------------*/
+
 .emby-button.block,
 .button-submit,
 .raised {
@@ -161,6 +195,9 @@
     -webkit-transform: none !important;
     transform: none !important;
 }
+
+/* Buttons: Header Buttons
+--------------------------------------------------------------------------*/
 
 .emby-tab-button.show-focus:focus,
 .headerButton:focus {
@@ -173,7 +210,9 @@
     padding: .6em 1.25em .8em 1.25em !important;
 }
 
-/* Action Sheet */
+/* Buttons: Action Sheet Menu Items
+--------------------------------------------------------------------------*/
+
 .actionSheetMenuItem {
     -webkit-transform: none !important;
     transform: none !important;
@@ -183,7 +222,9 @@
     padding-right: .5em !important;
 }
 
-/* List menu items */
+/* Buttons: List Menu Items
+--------------------------------------------------------------------------*/
+
 .listTextButton-autohide {
     -webkit-transform: none !important;
     transform: none !important;
@@ -191,15 +232,23 @@
     margin: .2em !important;
 }
 
-/* Collapsible */
+/* Buttons: Collapsible
+--------------------------------------------------------------------------*/
+
 .emby-collapsible-button {
     padding: .75em !important;
     -webkit-transform: none !important;
     transform: none !important;
 }
+
+/* Collapsible Button: Text */
 .emby-collapse > .emby-button.show-focus > .emby-collapsible-title {
     margin-left: 0.5em;
 }
+
+
+/* Buttons: Menu List Items
+--------------------------------------------------------------------------*/
 
 /* List Item Border */
 .listItem-border {
@@ -210,13 +259,16 @@
     padding-left: 0.5em !important;
     padding-right: 0.5em !important;
 }
+
 .layout-desktop .userPreferencesPage .listItem-border,
 .layout-tv .userPreferencesPage .listItem-border {
     padding-left: 6em !important;
     padding-right: 6em !important;
 }
 
-/* Media buttons */
+/* Buttons: Media Buttons (Play, Watched, Favourite...)
+--------------------------------------------------------------------------*/
+
 .layout-tv .mainDetailButtons .detailButton {
     font-size: 120% !important;
     margin-right: 1.5em !important;
@@ -230,7 +282,8 @@
     transform: scale(1.2) !important;
 }
 
-/* Slide buttons */
+/* Buttons: Slide Buttons (Desktop & Mobile)
+--------------------------------------------------------------------------*/
 .play-button,
 .detail-button,
 .favorite-button {
@@ -253,10 +306,14 @@
 }
 
 @media only screen and (max-height: 767px) and (orientation: landscape) {
-    .layout-mobile .button-container { margin-top: 3vh; }
+    .layout-mobile .button-container {
+        margin-top: 3vh;
+    }
 }
 
-/* Links acting as Buttons */
+/* Buttons: Links acting as Buttons
+--------------------------------------------------------------------------*/
+
 .button-link,
 .overview-expand {
     color: inherit !important;
@@ -265,15 +322,23 @@
     text-decoration: none !important;
 }
 
-/* ClearLinks */
-.layout-tv .sectionTitleContainer > .clearLink { display: none; }
+/* ClearLinks: Buttons with Link-Buttons inside
+--------------------------------------------------------------------------*/
 
+/* Clearlinks: Won't focus with remote > hide in TV layout */
+.layout-tv .sectionTitleContainer > .clearLink {
+    display: none;
+}
+
+/* Clearlink Container */
 .clearLink {
     padding: 0em 1em !important;
     -webkit-transform: none !important;
     transform: none !important;
     margin-left: 0px !important;
 }
+
+/* Clearlink: Buttons inside */
 .clearLink > .emby-button {
     padding: 0em 1em !important;
     font-size: 1.2em;
@@ -281,7 +346,8 @@
     margin: 0;
 }
 
-/* Misc Buttons */
+/* Misc Buttons
+--------------------------------------------------------------------------*/
 .listPaging .paper-icon-button-light:focus,
 .emby-button.sectionTitleTextButton.show-focus:focus {
     -webkit-transform: scale(1);
@@ -295,8 +361,12 @@
 ============================================================================
 */
 
-.emby-input { padding: .5em .6em; }
+/* Input */
+.emby-input {
+    padding: .5em .6em;
+}
 
+/* Textarea */
 .emby-textarea {
     padding: .5em .6em;
     resize: vertical !important;
@@ -306,17 +376,27 @@
     overflow-y: hidden;
 }
 
+/* Select Container */
 .emby-select-focusscale:focus {
     -webkit-transform: none !important;
     transform: none !important;
 }
 
-/* Select Arrow */
-.selectContainer .selectArrowContainer { top: 2em; }
-.trackSelectionFieldContainer .selectArrowContainer { top: .3em; }
-.selectArrow { margin-top: .1em !important; }
+/* Select Container: Arrow */
+.selectContainer .selectArrowContainer {
+    top: 2em;
+}
+.trackSelectionFieldContainer .selectArrowContainer {
+    top: .3em;
+}
+.selectArrow {
+    margin-top: .1em !important;
+}
 
-.selectLabel { align-self: center; }
+/* Select Container: Label */
+.selectLabel {
+    align-self: center;
+}
 
 
 /*
@@ -325,10 +405,16 @@
 ============================================================================
 */
 
-.layout-mobile .homeSectionsContainer { top: 62vh; }
+/* Header
+--------------------------------------------------------------------------*/
+
+.layout-mobile .homeSectionsContainer {
+    top: 62vh;
+}
 
 @media (max-width: 50em) and (orientation: portrait) {
 
+    /* Show Header at Bottom */
     .layout-mobile .skinHeader {
         top: auto;
         bottom: 0;
@@ -340,46 +426,78 @@
         padding-bottom: 0.5em;
         height: 2.9em;
     }
-    .layout-mobile .headerLeft { margin-right: .5em; }
-    .layout-mobile .headerRight { margin-left: .5em; }
-    .layout-mobile .sectionTabs { order: 1; }
+    .layout-mobile .headerLeft {
+        margin-right: .5em;
+    }
+    .layout-mobile .headerRight {
+        margin-left: .5em;
+    }
+    .layout-mobile .sectionTabs {
+        order: 1;
+    }
 
+    /* Move Tabs */
     .layout-mobile .emby-tab-button {
         padding: 1.25em 1.25em .25em 1.25em !important;
     }
-    .layout-mobile .skinHeader.headroom--unpinned { transform: translateY(100%); }
-    .layout-mobile .skinHeader.headroom--pinned { transform: translateY(0); }
+    .layout-mobile .skinHeader.headroom--unpinned {
+        transform: translateY(100%);
+    }
+    .layout-mobile .skinHeader.headroom--pinned {
+        transform: translateY(0);
+    }
 
-    .layout-mobile .homeSectionsContainer { top: 52vh; }
+    .layout-mobile .homeSectionsContainer {
+        top: 52vh;
+        /* background: linear-gradient(rgb(0 0 0 / 50%), rgb(0 0 0 / 70%)); */
+    }
+    
+    /* Header: Remove Logo */
+    .layout-mobile .pageTitle {
+        display: none;
+    }
 
-    .layout-mobile .pageTitle { display: none; }
-
+    /* Header: Rearrange Buttons */
     .layout-mobile .headerLeft {
         order: 2;
         justify-content: flex-end;
     }
-    .layout-mobile .headerRight { order: 1; }
+    .layout-mobile .headerRight {
+        order: 1;
+    }
 
-    .layout-mobile .appfooter { background: #0000 !important; }
+    /* Footer */
+    .layout-mobile .appfooter {
+        background: #0000 !important;
+    }
 
+    /* Main Drawer: Align */
     .layout-mobile .mainDrawer {
         margin-top: 0em;
         align-items: flex-end;
         margin-bottom: 3.9em;
     }
 
-    .layout-mobile .mainDrawer-scrollContainer { padding-bottom: 1vh; }
+    /* Drawer: Move options to bottom */
+    .layout-mobile .mainDrawer-scrollContainer {
+        padding-bottom: 1vh;
+    }
 
-    .layout-tv .toastContainer { bottom: 4em; }
+    /* Toast */
+    .layout-tv .toastContainer {
+        bottom: 4em;
+    }
 
+    /* Library Pages: Move up */
     .layout-mobile .libraryPage,
     .layout-mobile #displayPreferencesPage,
     .layout-mobile #homeScreenPreferencesPage,
     .layout-mobile #languagePreferencesPage {
         padding-top: 1em !important;
     }
-    .layout-mobile #itemDetailPage { padding-top: 0em !important; }
-
+    .layout-mobile #itemDetailPage {
+        padding-top: 0em !important;
+    }
     .layout-mobile #userProfilePage,
     .layout-mobile #myPreferencesMenuPage,
     .layout-mobile #quickConnectPreferencesPage,
@@ -387,25 +505,49 @@
         padding-top: 2em !important;
     }
 
-    .layout-mobile .itemBackdrop { margin-top: 0rem; }
-
-    .layout-mobile .pageTabContent > .focuscontainer-x { margin-top: 1em; }
-    .layout-mobile .nowPlayingInfoControls { padding-bottom: 2em; }
-    .layout-mobile .selectionCommandsPanel { top: 0em; }
-
-    /* webOS-safe: replace :has(...) rules with simpler defaults */
-    .layout-mobile .appfooter { bottom: 3.9em; } /* fallback */
-
-    /* Hide HeaderTabs & Footer when drawer opens (fallback: hide footer when drawer open) */
-    .layout-mobile .mainDrawer.drawer-open + .skinHeader > .headerTabs {
-        display: none !important;
+    /* Media Details: Move up */
+    .layout-mobile .itemBackdrop {
+        margin-top: 0rem;
     }
-    .layout-mobile .mainDrawer.drawer-open ~ .appfooter {
+
+    /* Filter Bar */
+    .layout-mobile .pageTabContent > .focuscontainer-x {
+        margin-top: 1em;
+    }
+    .layout-mobile .nowPlayingInfoControls {
+        padding-bottom: 2em;
+    }
+    .layout-mobile .selectionCommandsPanel {
+        top: 0em;
+    }
+
+    /* Footer: Placement depending on Header visibility */
+    .layout-mobile #reactRoot:has(.headroom--pinned) ~ .appfooter {
+        bottom: 5.8em;
+    }
+    .layout-mobile #reactRoot:has(.headroom--pinned>.sectionTabs.hide) ~ .appfooter {
+        bottom: 3.9em;
+    }
+
+    /* Now Playing Bar */
+    .layout-mobile .nowPlayingBarPositionContainer {
+        margin-right: .8em;
+        margin-left: .8em;
+    }
+    .layout-mobile .nowPlayingBarInfoContainer {
+        margin-left: .2em;
+    }
+
+    /* Hide HeaderTabs & Footer when drawer opens */
+    .layout-mobile .mainDrawer.drawer-open + .skinHeader > .headerTabs,
+    .layout-mobile #reactRoot:has(.mainDrawer.drawer-open) ~ .appfooter {
         display: none !important;
     }
 }
 
-/* Slides */
+/* Slides
+--------------------------------------------------------------------------*/
+
 @media only screen and (max-width: 767px) and (orientation: portrait) {
 
     #slides-container {
@@ -423,8 +565,13 @@
         height: 75%;
     }
 
-    .plot-container { display: none; }
-    .backdrop-container { width: 100%; }
+    .plot-container {
+        display: none;
+    }
+
+    .backdrop-container {
+        width: 100%;
+    }
 
     .dots-container {
         top: calc(25% + 15vh);
@@ -433,16 +580,27 @@
         background-color: #ffffff00;
     }
 
-    .genre { top: calc(25% + 15vh); }
-    .info-container { top: calc(25% + 10vh); }
-    .button-container { top: calc(25% + 25vh); }
+    .genre {
+        top: calc(25% + 15vh);
+    }
+
+    .info-container {
+        top: calc(25% + 10vh);
+    }
+
+    .button-container {
+        top: calc(25% + 25vh);
+    }
 
     .logo {
         top: 50%;
         left: 50%;
         max-height: 60%;
     }
-    .logo-container { top: 25%; }
+
+    .logo-container {
+        top: 25%;
+    }
 
     .pause-button {
         top: calc(25% + 25vh);
