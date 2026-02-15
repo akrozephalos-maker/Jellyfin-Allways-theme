@@ -79,60 +79,46 @@
   }
 }
 /* =========================================================
-   FIX: Counter/Badge wirklich oben rechts (Movies + Series)
+   BADGE / COUNTER -> wirklich oben rechts
    ========================================================= */
 
-/* 1) Setze die typischen Card-Wrapper als Position-Anchor */
+/* Anchor: irgendein Parent muss relative sein */
 .cardBox,
 .cardScalable,
-.cardPadder,
-.cardContent,
 .cardImageContainer,
-.cardOverlayContainer,
-.cardIndicators{
+.cardOverlayContainer{
   position: relative !important;
 }
 
-/* 2) Indicator-Wrapper selbst (falls vorhanden) oben rechts */
+/* Der Wrapper mit allen Badges */
 .cardIndicators{
-  top: 0 !important;
-  right: 0 !important;
+  position: absolute !important;
+  top: .25em !important;
+  right: .25em !important;
   left: auto !important;
   bottom: auto !important;
+
+  padding: 0 !important;
+  margin: 0 !important;
+
+  display: flex !important;
+  justify-content: flex-end !important;
+  align-items: flex-start !important;
+
+  transform: none !important;
+  z-index: 999 !important;
+  pointer-events: none !important;
 }
 
-/* 3) Der Badge/Zähler: alle gängigen Klassen abfangen */
-.cardIndicators .countIndicator,
-.cardIndicators .unplayedCountIndicator,
-.cardOverlayContainer .countIndicator,
-.cardOverlayContainer .unplayedCountIndicator,
-.cardImageContainer .countIndicator,
-.cardImageContainer .unplayedCountIndicator,
+/* Alles im Wrapper darf nichts “wegschieben” */
+.cardIndicators *{
+  transform: none !important;
+  margin: 0 !important;
+}
+
+/* Der eigentliche Zähler */
 .countIndicator,
 .unplayedCountIndicator{
-  position: absolute !important;
-
-  top: .35em !important;
-  right: .35em !important;
-  left: auto !important;
-  bottom: auto !important;
-
-  margin: 0 !important;
-  transform: none !important;         /* kill theme transforms */
-  inset: auto !important;             /* kill inset overrides */
-  z-index: 999 !important;
+  position: static !important; /* sitzt jetzt im wrapper oben rechts */
+  pointer-events: none !important;
 }
-
-/* 4) TV: etwas “mehr Ecke” + minimal größer */
-@media (hover: none) and (pointer: coarse){
-  .cardIndicators .countIndicator,
-  .cardIndicators .unplayedCountIndicator,
-  .countIndicator,
-  .unplayedCountIndicator{
-    top: .45em !important;
-    right: .45em !important;
-    transform: scale(1.08) !important;
-    transform-origin: top right !important;
-  }
-}
-
