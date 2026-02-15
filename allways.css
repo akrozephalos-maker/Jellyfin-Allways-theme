@@ -79,63 +79,58 @@
   }
 }
 /* =========================================================
-   Indicators (Unplayed badge + Played check) -> TOP RIGHT
+   Unplayed Badge (rund) -> echte obere rechte Ecke
    ========================================================= */
 
-/* Anchor für absolute Position */
+/* Anchor: Card muss Bezugspunkt sein */
 .cardBox,
 .cardScalable,
-.cardImageContainer,
-.cardOverlayContainer{
+.cardOverlayContainer,
+.cardImageContainer{
   position: relative !important;
 }
 
-/* Wrapper der Indicators oben rechts festnageln */
+/* Wrapper in die Ecke (entfernt Theme-Padding/Offsets) */
 .cardIndicators{
   position: absolute !important;
-  top: .25em !important;
-  right: .25em !important;
+  top: 0 !important;
+  right: 0 !important;
   left: auto !important;
   bottom: auto !important;
 
   padding: 0 !important;
   margin: 0 !important;
-
-  display: flex !important;
-  flex-direction: column !important;     /* Badge über Haken (falls beides da) */
-  gap: .25em !important;
-
-  align-items: flex-end !important;
-  justify-content: flex-start !important;
-
   transform: none !important;
   z-index: 999 !important;
   pointer-events: none !important;
 }
 
-/* Unplayed (Zähler) */
+/* Das runde Badge selbst: exakt an die Ecke */
 .unplayedCountIndicator{
-  position: static !important;           /* sitzt im cardIndicators Container */
+  position: absolute !important;
+  top: .15em !important;
+  right: .15em !important;
+  left: auto !important;
+  bottom: auto !important;
+
   margin: 0 !important;
   transform: none !important;
+  z-index: 1000 !important;
+}
+.cardPadder,
+.cardContent{
+  position: relative !important;
 }
 
-/* Played/Seen (Haken) – je nach Client heißt es so */
-.playedIndicator,
-.watchedIndicator,
-.playedIndicatorIcon,
-.watchedIndicatorIcon{
-  position: static !important;
-  margin: 0 !important;
-  transform: none !important;
+/* Optional: wenn du es wirklich "in die äußerste Ecke" willst (wie angeklebt)
+   -> Badge sitzt halb auf dem Rand */
+ /*
+.unplayedCountIndicator{
+  top: -.15em !important;
+  right: -.15em !important;
 }
+*/
 
-/* Falls dein Theme dem Icon eine eigene Position gibt */
-.cardIndicators .material-icons,
-.cardIndicators .md-icon,
-.cardIndicators svg{
-  transform: none !important;
-}
 /* =========================================================
    webOS 03.53.xx: Color fallback for indicators (forced)
    ========================================================= */
