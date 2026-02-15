@@ -16,8 +16,6 @@
 @import url("https://cdn.jsdelivr.net/gh/akrozephalos-maker/Jellyfin-Allways-theme@main/allways-playerv1.css");
 
 /* Font (MUSS nach den Imports stehen, aber weiterhin vor “normalem” CSS) */
-@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap");
-
-body, h1, h2, h3, h4 {
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"); body, h1, h2, h3, h4 {
   font-family: "Plus Jakarta Sans", sans-serif;
 }
