@@ -79,38 +79,60 @@
   }
 }
 /* =========================================================
-   Badge/Counter (z.B. "93") -> oben rechts in die Ecke
+   FIX: Counter/Badge wirklich oben rechts (Movies + Series)
    ========================================================= */
 
-/* Wichtig: Parent muss relative sein */
+/* 1) Setze die typischen Card-Wrapper als Position-Anchor */
 .cardBox,
 .cardScalable,
+.cardPadder,
+.cardContent,
+.cardImageContainer,
 .cardOverlayContainer,
 .cardIndicators{
   position: relative !important;
 }
 
-/* Der Zähler selbst */
-.countIndicator,
-.unplayedCountIndicator,
-.mediaSourceIndicator,
-.fullSyncIndicator{
-  position: absolute !important;
-  top: .45em !important;
-  right: .45em !important;
+/* 2) Indicator-Wrapper selbst (falls vorhanden) oben rechts */
+.cardIndicators{
+  top: 0 !important;
+  right: 0 !important;
   left: auto !important;
   bottom: auto !important;
-  margin: 0 !important;
-  z-index: 30 !important;
 }
 
-/* Optional: auf TV etwas größer / besser lesbar */
+/* 3) Der Badge/Zähler: alle gängigen Klassen abfangen */
+.cardIndicators .countIndicator,
+.cardIndicators .unplayedCountIndicator,
+.cardOverlayContainer .countIndicator,
+.cardOverlayContainer .unplayedCountIndicator,
+.cardImageContainer .countIndicator,
+.cardImageContainer .unplayedCountIndicator,
+.countIndicator,
+.unplayedCountIndicator{
+  position: absolute !important;
+
+  top: .35em !important;
+  right: .35em !important;
+  left: auto !important;
+  bottom: auto !important;
+
+  margin: 0 !important;
+  transform: none !important;         /* kill theme transforms */
+  inset: auto !important;             /* kill inset overrides */
+  z-index: 999 !important;
+}
+
+/* 4) TV: etwas “mehr Ecke” + minimal größer */
 @media (hover: none) and (pointer: coarse){
+  .cardIndicators .countIndicator,
+  .cardIndicators .unplayedCountIndicator,
   .countIndicator,
   .unplayedCountIndicator{
-    top: .55em !important;
-    right: .55em !important;
+    top: .45em !important;
+    right: .45em !important;
     transform: scale(1.08) !important;
     transform-origin: top right !important;
   }
 }
+
