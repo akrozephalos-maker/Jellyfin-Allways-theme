@@ -8,12 +8,12 @@
 */
 
 /* Stylesheets (order matters!) */
-@import url("https://cdn.jsdelivr.net/gh/akrozephalos-maker/Jellyfin-Allways-theme@main/allways-basev1.css");
-@import url("https://cdn.jsdelivr.net/gh/akrozephalos-maker/Jellyfin-Allways-theme@main/allways-systemv1.css");
-@import url("https://cdn.jsdelivr.net/gh/akrozephalos-maker/Jellyfin-Allways-theme@main/allways-pagesv1.css");
-@import url("https://cdn.jsdelivr.net/gh/akrozephalos-maker/Jellyfin-Allways-theme@main/allways-sectionsv1.css");
-@import url("https://cdn.jsdelivr.net/gh/akrozephalos-maker/Jellyfin-Allways-theme@main/allways-cardsv1.css");
-@import url("https://cdn.jsdelivr.net/gh/akrozephalos-maker/Jellyfin-Allways-theme@main/allways-playerv1.css");
+@import url("https://cdn.jsdelivr.net/gh/akrozephalos-maker/Jellyfin-Allways-theme@1580341202cd302e5b53106f53bc57df298f239e/allways-basev1.css");
+@import url("https://cdn.jsdelivr.net/gh/akrozephalos-maker/Jellyfin-Allways-theme@89f48d9e03cf0d4fc156eb3ff9e6ca9e8f7eec0f/allways-systemv1.css");
+@import url("https://cdn.jsdelivr.net/gh/akrozephalos-maker/Jellyfin-Allways-theme@698a1dd64cc9a437507c657164a315fdcc551a41/allways-pagesv1.css");
+@import url("https://cdn.jsdelivr.net/gh/akrozephalos-maker/Jellyfin-Allways-theme@77f46a68cfb4a9ff7ea4ef6684e57a323e7c5dc2/allways-sectionsv1.css");
+@import url("https://cdn.jsdelivr.net/gh/akrozephalos-maker/Jellyfin-Allways-theme@0d6d7800285938c14ec520256f65f9e5c46b22dd/allways-cardsv1.css");
+@import url("https://cdn.jsdelivr.net/gh/akrozephalos-maker/Jellyfin-Allways-theme@82a3c73e06fa6041a660d19f9b3e6a4a741ffd80/allways-playerv1.css");
 
 /* Font (MUSS nach den Imports stehen, aber weiterhin vor “normalem” CSS) */
 @import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"); body, h1, h2, h3, h4 {
