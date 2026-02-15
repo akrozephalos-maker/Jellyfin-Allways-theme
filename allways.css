@@ -79,59 +79,6 @@
   }
 }
 /* =========================================================
-   Unplayed Badge (rund) -> echte obere rechte Ecke
-   ========================================================= */
-
-/* Anchor: Card muss Bezugspunkt sein */
-.cardBox,
-.cardScalable,
-.cardOverlayContainer,
-.cardImageContainer{
-  position: relative !important;
-}
-
-/* Wrapper in die Ecke (entfernt Theme-Padding/Offsets) */
-.cardIndicators{
-  position: absolute !important;
-  top: 0 !important;
-  right: 0 !important;
-  left: auto !important;
-  bottom: auto !important;
-
-  padding: 0 !important;
-  margin: 0 !important;
-  transform: none !important;
-  z-index: 999 !important;
-  pointer-events: none !important;
-}
-
-/* Das runde Badge selbst: exakt an die Ecke */
-.unplayedCountIndicator{
-  position: absolute !important;
-  top: .15em !important;
-  right: .15em !important;
-  left: auto !important;
-  bottom: auto !important;
-
-  margin: 0 !important;
-  transform: none !important;
-  z-index: 1000 !important;
-}
-.cardPadder,
-.cardContent{
-  position: relative !important;
-}
-
-/* Optional: wenn du es wirklich "in die äußerste Ecke" willst (wie angeklebt)
-   -> Badge sitzt halb auf dem Rand */
- /*
-.unplayedCountIndicator{
-  top: -.15em !important;
-  right: -.15em !important;
-}
-*/
-
-/* =========================================================
    webOS 03.53.xx: Color fallback for indicators (forced)
    ========================================================= */
 
@@ -150,5 +97,45 @@
 .cardIndicators .material-icons{
   color: #000 !important;
   text-shadow: 0 0 2px rgba(255,255,255,.65) !important;
+}
+/* =========================================================
+   BADGE -> wirklich in die obere rechte Ecke (PC + TV)
+   Trifft: countIndicator (türkis Zahl) + unplayedCountIndicator
+   ========================================================= */
+
+/* Bezugspunkt */
+.cardBox,
+.cardScalable,
+.cardPadder,
+.cardImageContainer,
+.cardOverlayContainer {
+  position: relative !important;
+}
+
+/* Wrapper ent-offsetten */
+.cardIndicators{
+  position: absolute !important;
+  inset: 0 !important;            /* top/right/bottom/left = 0 */
+  padding: 0 !important;
+  margin: 0 !important;
+  transform: none !important;
+  pointer-events: none !important;
+  z-index: 999 !important;
+}
+
+/* Badge selbst: fest oben rechts */
+.cardBox .countIndicator,
+.cardBox .unplayedCountIndicator,
+.cardScalable .countIndicator,
+.cardScalable .unplayedCountIndicator{
+  position: absolute !important;
+  top: .15em !important;
+  right: .15em !important;
+  left: auto !important;
+  bottom: auto !important;
+
+  margin: 0 !important;
+  transform: none !important;
+  z-index: 1000 !important;
 }
 
