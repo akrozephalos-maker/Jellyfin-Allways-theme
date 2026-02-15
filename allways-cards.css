@@ -581,6 +581,50 @@
 
 /*
 ===========================================================================
+   Cards: Indicators (Corner Badge like screenshot, uses theme accent)
+===========================================================================
+*/
+
+/* Make sure the badge can anchor cleanly to the image corner */
+.cardImageContainer {
+    position: relative !important;
+}
+
+/* Place the indicator container in the top-right corner */
+.cardContent .cardIndicators,
+.mediaSourceIndicator {
+    position: absolute !important;
+    top: .35em !important;
+    right: .35em !important;
+    left: auto !important;
+    bottom: auto !important;
+}
+
+/* Corner badge style (count "4" etc.) */
+.countIndicator {
+    background: var(--accent100) !important;   /* <- theme color */
+    color: #fff !important;
+    font-weight: 700 !important;
+    font-size: 90% !important;
+
+    padding: .25em .55em !important;
+    min-width: 1.6em !important;
+    text-align: center !important;
+
+    border-radius: 0 !important;              /* <- sharp corner badge */
+    line-height: 1.2 !important;
+}
+
+/* Optional: also make "played" + "media source" use theme color */
+.playedIndicator,
+.mediaSourceIndicator {
+    background: var(--accent100) !important;   /* <- theme color */
+    color: #fff !important;
+    border-radius: 0 !important;
+}
+
+/*
+===========================================================================
    Dynamic Card Size
 ===========================================================================
 */
