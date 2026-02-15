@@ -5,7 +5,7 @@
 @media (hover: none) and (pointer: coarse){
 
   /* 1) Global TV font scale */
-  .layout-tv{ font-size: 20px !important; } /* 18–22 je nach Couch */
+  .layout-tv{ font-size: 22px !important; } /* 18–22 je nach Couch */
 
   /* 2) Detail pages: title + meta + overview bigger */
   .layout-tv #itemDetailPage .itemName,
