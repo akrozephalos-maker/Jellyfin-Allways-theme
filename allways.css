@@ -1,141 +1,23 @@
-/* =========================================================
-   INFINITV TV READABILITY PATCH (only TV)
-   Ziel: Couch-Lesbarkeit hoch, Theme-Design bleibt.
-   ========================================================= */
-@media (hover: none) and (pointer: coarse){
+/*
+==============================================================================
+   ALLWAYS (master)
+   Loads modules via @import (infinitv-style)
+==============================================================================
 
-  /* 1) Global TV font scale */
-  .layout-tv{ font-size: 22px !important; } /* 18–22 je nach Couch */
+   Repo: akrozephalos-maker/Jellyfin-Allways-theme (branch: main)
+*/
 
-  /* 2) Detail pages: title + meta + overview bigger */
-  .layout-tv #itemDetailPage .itemName,
-  .layout-tv .itemDetailPage .itemName{
-    font-size: 2.2rem !important;
-    font-weight: 800 !important;
-    line-height: 1.15 !important;
-  }
+/* Stylesheets (order matters!) */
+@import url("https://cdn.jsdelivr.net/gh/akrozephalos-maker/Jellyfin-Allways-theme@main/allways-base.css");
+@import url("https://cdn.jsdelivr.net/gh/akrozephalos-maker/Jellyfin-Allways-theme@main/allways-system.css");
+@import url("https://cdn.jsdelivr.net/gh/akrozephalos-maker/Jellyfin-Allways-theme@main/allways-pages.css");
+@import url("https://cdn.jsdelivr.net/gh/akrozephalos-maker/Jellyfin-Allways-theme@main/allways-sections.css");
+@import url("https://cdn.jsdelivr.net/gh/akrozephalos-maker/Jellyfin-Allways-theme@main/allways-cards.css");
+@import url("https://cdn.jsdelivr.net/gh/akrozephalos-maker/Jellyfin-Allways-theme@main/allways-player.css");
 
-  .layout-tv #itemDetailPage .itemMiscInfo,
-  .layout-tv .itemDetailPage .itemMiscInfo{
-    font-size: 1.05rem !important;
-    line-height: 1.35 !important;
-    opacity: .9 !important;
-  }
+/* Font (MUSS nach den Imports stehen, aber weiterhin vor “normalem” CSS) */
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap");
 
-  .layout-tv #itemDetailPage .itemOverview,
-  .layout-tv .itemDetailPage .itemOverview,
-  .layout-tv #itemDetailPage .overview,
-  .layout-tv .itemDetailPage .overview{
-    font-size: 1.15rem !important;
-    line-height: 1.5 !important;
-    max-width: 75ch !important;
-  }
-
-  /* 3) Buttons bigger + more spacing */
-  .layout-tv #itemDetailPage .emby-button,
-  .layout-tv .itemDetailPage .emby-button{
-    font-size: 1.05rem !important;
-    padding: .85em 1.15em !important;
-    border-radius: 14px !important;
-  }
-
-  /* 4) Tabs / section titles bigger */
-  .layout-tv .sectionTitle{
-    font-size: 1.2rem !important;
-    margin-top: .7em !important;
-  }
-
-  /* 5) Episode list / items bigger */
-  .layout-tv .listItem{
-    padding-top: .75em !important;
-    padding-bottom: .75em !important;
-  }
-
-  .layout-tv .listItemBodyText,
-  .layout-tv .listItemBodyText-secondary,
-  .layout-tv .secondary{
-    font-size: 1.05rem !important;
-    line-height: 1.45 !important;
-  }
-
-  /* 6) Dialogs / select menus (audio/subtitle) bigger */
-  .layout-tv .emby-select,
-  .layout-tv .detailTrackSelect{
-    font-size: 1.05rem !important;
-    padding: .5em 2.2em .5em .6em !important;
-  }
-
-  /* 7) Player OSD text bigger */
-  .layout-tv .osdText,
-  .layout-tv .osdTitle,
-  .layout-tv .osdSecondaryText{
-    font-size: 1.05rem !important;
-  }
-
-  /* 8) Subtitles bigger (couch) */
-  video::cue{
-    font-size: 1.35em !important;
-    text-shadow: 0 3px 10px rgba(0,0,0,.85) !important;
-  }
+body, h1, h2, h3, h4 {
+  font-family: "Plus Jakarta Sans", sans-serif;
 }
-/* =========================================================
-   webOS 03.53.xx: Color fallback for indicators (forced)
-   ========================================================= */
-
-/* Unplayed badge color (force) */
-.unplayedCountIndicator{
-  background-color: rgb(202,20,20) !important; /* deine Wunschfarbe */
-  color: #fff !important;
-  border: 1px solid rgba(255,255,255,.18) !important;
-}
-
-/* Seen/Played check (black with white outline for visibility) */
-.playedIndicator,
-.watchedIndicator,
-.playedIndicatorIcon,
-.watchedIndicatorIcon,
-.cardIndicators .material-icons{
-  color: #000 !important;
-  text-shadow: 0 0 2px rgba(255,255,255,.65) !important;
-}
-/* =========================================================
-   BADGE -> wirklich in die obere rechte Ecke (PC + TV)
-   Trifft: countIndicator (türkis Zahl) + unplayedCountIndicator
-   ========================================================= */
-
-/* Bezugspunkt */
-.cardBox,
-.cardScalable,
-.cardPadder,
-.cardImageContainer,
-.cardOverlayContainer {
-  position: relative !important;
-}
-
-/* Wrapper ent-offsetten */
-.cardIndicators{
-  position: absolute !important;
-  inset: 0 !important;            /* top/right/bottom/left = 0 */
-  padding: 0 !important;
-  margin: 0 !important;
-  transform: none !important;
-  pointer-events: none !important;
-  z-index: 999 !important;
-}
-
-/* Badge selbst: fest oben rechts */
-.cardBox .countIndicator,
-.cardBox .unplayedCountIndicator,
-.cardScalable .countIndicator,
-.cardScalable .unplayedCountIndicator{
-  position: absolute !important;
-  top: .15em !important;
-  right: .15em !important;
-  left: auto !important;
-  bottom: auto !important;
-
-  margin: 0 !important;
-  transform: none !important;
-  z-index: 1000 !important;
-}
-
