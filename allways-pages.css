@@ -349,6 +349,7 @@
     margin-left: .5em !important;
 }
 
+
 @media all and (max-width: 75em) {
     .layout-desktop .detailLogo {
         display: block;
@@ -429,11 +430,9 @@
     padding-bottom: 0em;
     padding-right: 0;
 }
-
-/* ALLWAYS CHANGE: webOS-safe (removed :has()) */
 .layout-tv [dir=ltr] .detailRibbon,
 .layout-tv .detailPagePrimaryContent,
-.layout-tv .detailPagePrimaryContent .itemsContainer-tv {
+.layout-tv .detailPagePrimaryContent .itemsContainer-tv:has(.listItem-largeImage) {
     padding-left: 29vw;
 }
 
@@ -490,27 +489,6 @@
     padding-right: 3% !important;
 }
 
-/*
-===========================================================================
-   ALLWAYS: TV Readability – Detail Pages (extra, in pages.css)
-===========================================================================
-*/
-.layout-tv #itemDetailPage .itemName {
-    font-size: 170% !important;
-    line-height: 1.12 !important;
-}
-.layout-tv #itemDetailPage .overview {
-    font-size: 135% !important;
-    line-height: 1.35 !important;
-    max-width: 70vw !important;
-}
-.layout-tv #itemDetailPage .itemMiscInfo {
-    font-size: 135% !important;
-}
-.layout-tv #itemDetailPage .mainDetailButtons .detailButton {
-    font-size: 135% !important;
-    margin-right: 1.6em !important;
-}
 
 /*
 ===========================================================================
@@ -565,10 +543,10 @@
 .layout-mobile #myPreferencesMenuPage .sectionTitle {
     padding-left: 0em !important;
     font-weight: 600;
-}
+} 
 .layout-mobile .userPreferencesPage .listItem {
     padding-right: 1.5em !important;
-}
+} 
 .layout-mobile .userPreferencesPage .listItemIcon {
     width: 2% !important;
     text-align: left;
@@ -620,7 +598,7 @@
     margin-bottom: 1em;
 }
 #displayPreferencesPage .checkboxContainer,
-#displayPreferencesPage .selectContainer,
+#displayPreferencesPage .selectContainer, 
 #homeScreenPreferencesPage .selectContainer,
 #homeScreenPreferencesPage .checkboxContainer,
 #homeScreenPreferencesPage .checkboxListContainer,
