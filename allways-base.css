@@ -1,19 +1,5 @@
 /*
 ===========================================================================
-   ALLWAYS-BASE (fork of infinitv-base)
-   - webOS safe: removed :has()
-   - TV readability: 130%
-   - Badges: real top-right corner (count + unplayed + seen/check)
-===========================================================================
-
-   NOTE:
-   - This file is based on infinitv-base.css content you posted.
-   - You still need the other parts (system/pages/sections/cards/player)
-     if you want 100% identical look to Infinitv.
-*/
-
-/*
-===========================================================================
    Variables
 ===========================================================================
 */
@@ -53,55 +39,13 @@
     --textshadow: 2px 2px 4px black;
 }
 
-/* =========================================================
-   ALLWAYS ADD: TV readability (couch distance)
-   ========================================================= */
-.layout-tv {
-    font-size: 130% !important;
-}
-
-/*
-============================================================================
-   Wallpaper
-============================================================================
-*/
-
-/* Background Image: If Backdrops disabled */
-.backgroundContainer {
-    background:
-        linear-gradient(rgb(0 0 0 / 50%), rgb(0 0 0 / 70%)),
-        var(--bgImage) !important;
-    background-size: cover !important;
-    background-position: center !important;
-    background-repeat: no-repeat !important;
-}
-
-/* Darken Background with Backdrops enables */
-.backgroundContainer.withBackdrop,
-.noBackdropTransparency .detailPagePrimaryContainer,
-.noBackdropTransparency .detailPageSecondaryContainer {
-    background: rgba(0, 0, 0, var(--bgdarkness)) !important;
-}
-
-/* Background Image on Homepage
-   webOS-safe: removed :has() selector
-   We apply the same background style when backdrops are enabled. */
-.backgroundContainer.withBackdrop {
-    background:
-        linear-gradient(rgb(0 0 0 / 50%), rgb(0 0 0 / 70%)),
-        var(--bgImage) !important;
-    background-size: cover !important;
-    background-position: center !important;
-    background-repeat: no-repeat !important;
-}
-
 /*
 ============================================================================
    Text Colors
 ============================================================================
 */
 
-/* Color: Accent 80%
+/* Color: Accent 80% 
 --------------------------------------------------------------------------*/
 #loginPage .cardImage,
 .navMenuOption-selected,
@@ -124,7 +68,7 @@
     color: var(--accent80) !important;
 }
 
-/* Color: Accent 100%
+/* Color: Accent 100% 
 --------------------------------------------------------------------------*/
 .listItemIcon.check,
 .mdl-radio__button[checked] + .mdl-radio__circles .mdl-radio__inner-circle,
@@ -257,7 +201,7 @@
 
 /* Focus */
 .emby-button:focus,
-.searchSuggestionsList > div:focus-within { /* webOS-safe replacement for :has(.emby-button:focus) */
+.searchSuggestionsList > div:has(.emby-button:focus) {
     background: var(--bgdark40) !important;
 }
 
@@ -385,11 +329,21 @@
 --------------------------------------------------------------------------*/
 
 /* Backgrounds: Defaults for empty cards */
-.defaultCardBackground1 { background: hsl(var(--accent-h), var(--accent-s), 17%); }
-.defaultCardBackground2 { background: hsl(var(--accent-h), var(--accent-s), 16%); }
-.defaultCardBackground3 { background: hsl(var(--accent-h), var(--accent-s), 15%); }
-.defaultCardBackground4 { background: hsl(var(--accent-h), var(--accent-s), 14%); }
-.defaultCardBackground5 { background: hsl(var(--accent-h), var(--accent-s), 13%); }
+.defaultCardBackground1 {
+    background: hsl(var(--accent-h), var(--accent-s), 17%);
+}
+.defaultCardBackground2 {
+    background: hsl(var(--accent-h), var(--accent-s), 16%);
+}
+.defaultCardBackground3 {
+    background: hsl(var(--accent-h), var(--accent-s), 15%);
+}
+.defaultCardBackground4 {
+    background: hsl(var(--accent-h), var(--accent-s), 14%);
+}
+.defaultCardBackground5 {
+    background: hsl(var(--accent-h), var(--accent-s), 13%);
+}
 
 /*
 ============================================================================
@@ -443,7 +397,7 @@
 
 /*
 ============================================================================
-   Glow & Shadows
+   Glow & Schadows
 ============================================================================
 */
 
@@ -508,7 +462,7 @@
 @media (pointer: fine) {
     .detailImageContainer .card {
         box-shadow: var(--cardshadow) !important;
-    }
+    } 
 }
 
 /* No Shadows / no Glow */
@@ -547,7 +501,7 @@
 .subtitleappearance-preview,
 .toast,
 .searchSuggestionsList > div:hover,
-.searchSuggestionsList > div:focus-within { /* webOS-safe replacement */
+.searchSuggestionsList > div:has(.emby-button:focus) {
     border-radius: var(--rounding-system) !important;
 }
 
@@ -594,74 +548,3 @@
     border-radius: 0 !important;
 }
 
-/* =========================================================
-   ALLWAYS ADD: BADGE/INDICATORS -> true top-right corner
-   (count + unplayed + seen/check)
-   ========================================================= */
-
-.cardBox,
-.cardScalable,
-.cardPadder,
-.cardContent,
-.cardImageContainer,
-.cardOverlayContainer {
-    position: relative !important;
-}
-
-.cardIndicators{
-    position: absolute !important;
-    top: 0 !important;
-    right: 0 !important;
-    left: auto !important;
-    bottom: auto !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    transform: none !important;
-    z-index: 999 !important;
-    pointer-events: none !important;
-}
-
-/* Both badge types (turquoise count + unplayed count) */
-.countIndicator,
-.unplayedCountIndicator{
-    position: absolute !important;
-    top: .05em !important;
-    right: .05em !important;
-    left: auto !important;
-    bottom: auto !important;
-    margin: 0 !important;
-    transform: none !important;
-    z-index: 1000 !important;
-}
-
-/* Seen / Played check under the badge */
-.playedIndicator,
-.playstatebutton-icon-played,
-.listItemIcon.check{
-    position: absolute !important;
-    top: 2.05em !important;
-    right: .25em !important;
-    margin: 0 !important;
-    transform: none !important;
-    z-index: 1000 !important;
-}
-
-/* =========================================================
-   ALLWAYS ADD: TV focus ring stronger (webOS safe)
-   Optional: if you want a visible red ring on focus
-   ========================================================= */
-/*
-:root{ --allwaysRed: rgb(202,20,20); }
-
-.show-focus .paper-icon-button-light:focus,
-.show-focus .paper-icon-button-light.focused,
-.show-focus .paper-icon-button-light.selected,
-.show-focus .emby-button:focus,
-.show-focus .emby-button.focused,
-.show-focus .emby-button.selected{
-    border-radius: 999px !important;
-    box-shadow: 0 0 0 4px var(--allwaysRed), 0 0 0 8px rgba(0,0,0,.55) !important;
-    background: rgba(202,20,20,.18) !important;
-    color: #fff !important;
-}
-*/
