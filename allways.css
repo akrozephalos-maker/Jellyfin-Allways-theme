@@ -79,10 +79,10 @@
   }
 }
 /* =========================================================
-   BADGE / COUNTER -> wirklich oben rechts
+   Indicators (Unplayed badge + Played check) -> TOP RIGHT
    ========================================================= */
 
-/* Anchor: irgendein Parent muss relative sein */
+/* Anchor für absolute Position */
 .cardBox,
 .cardScalable,
 .cardImageContainer,
@@ -90,7 +90,7 @@
   position: relative !important;
 }
 
-/* Der Wrapper mit allen Badges */
+/* Wrapper der Indicators oben rechts festnageln */
 .cardIndicators{
   position: absolute !important;
   top: .25em !important;
@@ -102,23 +102,58 @@
   margin: 0 !important;
 
   display: flex !important;
-  justify-content: flex-end !important;
-  align-items: flex-start !important;
+  flex-direction: column !important;     /* Badge über Haken (falls beides da) */
+  gap: .25em !important;
+
+  align-items: flex-end !important;
+  justify-content: flex-start !important;
 
   transform: none !important;
   z-index: 999 !important;
   pointer-events: none !important;
 }
 
-/* Alles im Wrapper darf nichts “wegschieben” */
-.cardIndicators *{
-  transform: none !important;
+/* Unplayed (Zähler) */
+.unplayedCountIndicator{
+  position: static !important;           /* sitzt im cardIndicators Container */
   margin: 0 !important;
+  transform: none !important;
 }
 
-/* Der eigentliche Zähler */
-.countIndicator,
-.unplayedCountIndicator{
-  position: static !important; /* sitzt jetzt im wrapper oben rechts */
-  pointer-events: none !important;
+/* Played/Seen (Haken) – je nach Client heißt es so */
+.playedIndicator,
+.watchedIndicator,
+.playedIndicatorIcon,
+.watchedIndicatorIcon{
+  position: static !important;
+  margin: 0 !important;
+  transform: none !important;
 }
+
+/* Falls dein Theme dem Icon eine eigene Position gibt */
+.cardIndicators .material-icons,
+.cardIndicators .md-icon,
+.cardIndicators svg{
+  transform: none !important;
+}
+/* =========================================================
+   webOS 03.53.xx: Color fallback for indicators (forced)
+   ========================================================= */
+
+/* Unplayed badge color (force) */
+.unplayedCountIndicator{
+  background-color: rgb(202,20,20) !important; /* deine Wunschfarbe */
+  color: #fff !important;
+  border: 1px solid rgba(255,255,255,.18) !important;
+}
+
+/* Seen/Played check (black with white outline for visibility) */
+.playedIndicator,
+.watchedIndicator,
+.playedIndicatorIcon,
+.watchedIndicatorIcon,
+.cardIndicators .material-icons{
+  color: #000 !important;
+  text-shadow: 0 0 2px rgba(255,255,255,.65) !important;
+}
+
